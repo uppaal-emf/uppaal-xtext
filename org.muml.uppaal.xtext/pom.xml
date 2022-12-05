@@ -37,6 +37,8 @@
 					<arguments>
 						<argument>${project.basedir}/src/org/muml/uppaal/GenerateUppaalXML.mwe2</argument>
 						<argument>-p</argument>
+						<argument>rootPath=${project.parent.basedir}</argument>
+						<argument>-p</argument>
 						<argument>pluginId=${project.artifactId}</argument>
 						<argument>-p</argument>
 						<argument>modelPluginId=org.muml.uppaal</argument>
@@ -44,6 +46,7 @@
 					<classpathScope>compile</classpathScope>
 					<includePluginDependencies>true</includePluginDependencies>
 					<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
+					<stopUnresponsiveDaemonThreads>true</stopUnresponsiveDaemonThreads>
 				</configuration>
 				<dependencies>
 					<dependency>

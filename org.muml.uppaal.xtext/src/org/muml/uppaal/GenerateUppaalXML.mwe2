@@ -4,13 +4,13 @@ import org.eclipse.emf.mwe.utils.StandaloneSetup
 import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
 
+var rootPath
 var pluginId
 var modelPluginId
-var rootPath = "../"
 
 Workflow {
 	bean = StandaloneSetup {
-		platformUri = "${rootPath}"
+		platformUri = rootPath
 		scanClassPath = true
 		
 		registerGeneratedEPackage = "${modelPluginId}.UppaalPackage"
