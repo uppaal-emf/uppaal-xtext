@@ -35,7 +35,7 @@
 				<configuration>
 					<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
 					<arguments>
-						<argument>${project.basedir}/src/org/muml/uppaal/GenerateUppaalXML.mwe2</argument>
+						<argument>${project.baseUri}/src/org/muml/uppaal/GenerateUppaalXML.mwe2</argument>
 						<argument>-p</argument>
 						<argument>rootPath=${project.parent.basedir}</argument>
 						<argument>-p</argument>

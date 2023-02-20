@@ -323,6 +323,13 @@
 						<failIfNoTests>false</failIfNoTests>
 						<useUIHarness>false</useUIHarness>
 					</configuration>
+					<dependencies>
+						<dependency>
+						    <groupId>org.eclipse.platform</groupId>
+						    <artifactId>org.eclipse.osgi.compatibility.state</artifactId>
+						    <version>1.2.800</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>

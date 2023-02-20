@@ -2,8 +2,9 @@ package org.muml.uppaal.scoping;
 
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.muml.uppaal.core.IdentifiableElement;
 import org.muml.uppaal.core.NamedElement;
+import org.muml.uppaal.templates.Edge;
+import org.muml.uppaal.templates.Location;
 import org.muml.uppaal.types.Type;
 
 /**
@@ -17,7 +18,16 @@ public class UppaalQualifiedNameProvider extends DefaultDeclarativeQualifiedName
 	 * @param element The element to get the id from.
 	 * @return The id as a qualified name.
 	 */
-	QualifiedName qualifiedName(IdentifiableElement element) {
+	QualifiedName qualifiedName(Location element) {
+		return QualifiedName.create(element.getId());
+	}
+	
+	/**
+	 * Uses the unique id for elements that do have such an id.
+	 * @param element The element to get the id from.
+	 * @return The id as a qualified name.
+	 */
+	QualifiedName qualifiedName(Edge element) {
 		return QualifiedName.create(element.getId());
 	}
 	

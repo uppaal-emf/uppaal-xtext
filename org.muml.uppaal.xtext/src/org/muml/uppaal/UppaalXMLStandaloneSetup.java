@@ -3,6 +3,19 @@
  */
 package org.muml.uppaal;
 
+import org.muml.uppaal.core.CorePackage;
+import org.muml.uppaal.declarations.DeclarationsPackage;
+import org.muml.uppaal.declarations.global.GlobalPackage;
+import org.muml.uppaal.declarations.system.SystemPackage;
+import org.muml.uppaal.expressions.ExpressionsPackage;
+import org.muml.uppaal.queries.QueriesPackage;
+import org.muml.uppaal.statements.StatementsPackage;
+import org.muml.uppaal.templates.TemplatesPackage;
+import org.muml.uppaal.types.TypesPackage;
+import org.muml.uppaal.visuals.VisualsPackage;
+
+import com.google.inject.Injector;
+import static org.eclipse.emf.ecore.EPackage.Registry.INSTANCE;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -11,5 +24,28 @@ public class UppaalXMLStandaloneSetup extends UppaalXMLStandaloneSetupGenerated 
 
 	public static void doSetup() {
 		new UppaalXMLStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
+	
+	@Override
+	public void register(Injector injector) {
+		// Core components
+		INSTANCE.computeIfAbsent(UppaalPackage.eNS_URI, uri -> UppaalPackage.eINSTANCE);
+		INSTANCE.computeIfAbsent(CorePackage.eNS_URI, uri -> CorePackage.eINSTANCE);
+		INSTANCE.computeIfAbsent(TypesPackage.eNS_URI, uri -> TypesPackage.eINSTANCE);
+		INSTANCE.computeIfAbsent(TemplatesPackage.eNS_URI, uri -> TemplatesPackage.eINSTANCE);
+
+		// Language components
+		INSTANCE.computeIfAbsent(DeclarationsPackage.eNS_URI, uri -> DeclarationsPackage.eINSTANCE);
+		INSTANCE.computeIfAbsent(SystemPackage.eNS_URI, uri -> SystemPackage.eINSTANCE);
+		INSTANCE.computeIfAbsent(GlobalPackage.eNS_URI, uri -> GlobalPackage.eINSTANCE);
+		
+		INSTANCE.computeIfAbsent(ExpressionsPackage.eNS_URI, uri -> ExpressionsPackage.eINSTANCE);
+		INSTANCE.computeIfAbsent(QueriesPackage.eNS_URI, uri -> QueriesPackage.eINSTANCE);
+		INSTANCE.computeIfAbsent(StatementsPackage.eNS_URI, uri -> StatementsPackage.eINSTANCE);
+		
+		// Template visuals
+		INSTANCE.computeIfAbsent(VisualsPackage.eNS_URI, uri -> VisualsPackage.eINSTANCE);
+		
+		super.register(injector);
 	}
 }

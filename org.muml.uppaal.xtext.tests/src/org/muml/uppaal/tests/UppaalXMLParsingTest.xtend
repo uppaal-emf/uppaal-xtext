@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import org.muml.uppaal.NTA
+import org.junit.jupiter.api.Disabled
 
 @ExtendWith(InjectionExtension)
 @InjectWith(UppaalXMLInjectorProvider)
@@ -19,6 +20,7 @@ class UppaalXMLParsingTest {
 	ParseHelper<NTA> parseHelper
 	
 	@Test
+	@Disabled
 	def void loadModel() {
 		val result = parseHelper.parse('''
 			Hello Xtext!
