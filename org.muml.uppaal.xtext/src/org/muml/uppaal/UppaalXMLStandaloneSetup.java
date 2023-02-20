@@ -13,6 +13,8 @@ import org.muml.uppaal.statements.StatementsPackage;
 import org.muml.uppaal.templates.TemplatesPackage;
 import org.muml.uppaal.types.TypesPackage;
 import org.muml.uppaal.visuals.VisualsPackage;
+import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
+import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 
 import com.google.inject.Injector;
 import static org.eclipse.emf.ecore.EPackage.Registry.INSTANCE;
@@ -23,6 +25,10 @@ import static org.eclipse.emf.ecore.EPackage.Registry.INSTANCE;
 public class UppaalXMLStandaloneSetup extends UppaalXMLStandaloneSetupGenerated {
 
 	public static void doSetup() {
+		// Initialize OCL
+		PivotStandaloneSetup.doSetup();
+		CompleteOCLStandaloneSetup.doSetup();
+		
 		new UppaalXMLStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 	

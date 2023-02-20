@@ -13,6 +13,8 @@ Require-Bundle: org.muml.uppaal,
  org.eclipse.equinox.common;bundle-version="3.5.0",
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.util,
+ org.eclipse.ocl,
+ org.eclipse.ocl.xtext.completeocl,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.muml.uppaal.validation,
