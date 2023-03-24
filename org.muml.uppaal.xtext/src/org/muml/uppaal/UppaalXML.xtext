@@ -645,7 +645,7 @@ LiteralExpressionText returns ecore::EString:
 
 // Function Calls
 FunctionCallExpression returns expressions::FunctionCallExpression:
-	function=[core::CallableElement|UPPAAL_IDENTIFIER]
+	function=[declarations::Function|UPPAAL_IDENTIFIER]
 	'('
 	(argument+=Expression
 	(',' argument+=Expression)*)?
