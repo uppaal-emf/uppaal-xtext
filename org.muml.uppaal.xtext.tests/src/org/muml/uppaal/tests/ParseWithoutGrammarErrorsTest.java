@@ -17,29 +17,23 @@ import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.muml.uppaal.UppaalXMLStandaloneSetup;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(UppaalXMLInjectorProvider.class)
 public class ParseWithoutGrammarErrorsTest {
+	
+	@Inject
+	private XtextResourceSet resourceSet;
 
-    private Injector injector;
-
-    public void setup() {
-    	UppaalXMLStandaloneSetup.doSetup(); 
-    	injector = new UppaalXMLInjectorProvider().getInjector();    	
-    }
-
-    private Resource loadObjectModel(URI uri) {
-		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
+    private Resource loadObjectModel(URI uri) {		
+    	resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		
-		set.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		System.err.println("set: " + resourceSet + ", uri: " + uri);
 		
-		System.err.println("set: " + set + ", uri: " + uri);
-		
-		Resource res = set.getResource(uri,  true);
+		Resource res = resourceSet.getResource(uri,  true);
 		
 		
         return res;
@@ -118,7 +112,6 @@ public class ParseWithoutGrammarErrorsTest {
     
     @Test
     public void parserErrorsMatch() {
-    	setup();
     	for(Object[] row : data()) {
     		System.out.println((String)row[0]);
     		parserErrorsBelowBoundsInFile((String)row[0], (int)row[1]);
@@ -127,7 +120,6 @@ public class ParseWithoutGrammarErrorsTest {
     
     @Test
     public void linkerErrorsMatch() {
-    	setup();
     	for(Object[] row : data()) {
     		linkerErrorsBelowBoundsInFile((String)row[0], (int)row[2]);
     	}
