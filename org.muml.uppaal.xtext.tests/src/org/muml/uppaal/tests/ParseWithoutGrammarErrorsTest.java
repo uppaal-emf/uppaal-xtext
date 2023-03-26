@@ -1,127 +1,110 @@
 package org.muml.uppaal.tests;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.DynamicTest.stream;
+
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.PathMatcher;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Named;
+import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.muml.uppaal.UppaalPackage;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(UppaalXMLInjectorProvider.class)
+@TestInstance(Lifecycle.PER_CLASS)
 public class ParseWithoutGrammarErrorsTest {
 	
+	/* Path to test resources */
+	private static final Path TESTDIR_PATH = Path.of("data/demo-new");
+	private static final PathMatcher XML_MATCHER = FileSystems.getDefault().getPathMatcher("glob:**.{xml,XML}");
+		
 	@Inject
 	private XtextResourceSet resourceSet;
+	
+	/* Files to test with */
+	private Stream<Named<Path>> testFiles;
+	
+	@BeforeAll
+	public void setUp() throws IOException {
+		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true);
+		resourceSet.setClasspathURIContext(getClass());
 
-    private Resource loadObjectModel(URI uri) {		
-    	resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-		
-		System.err.println("set: " + resourceSet + ", uri: " + uri);
-		
-		Resource res = resourceSet.getResource(uri,  true);
-		
-		
-        return res;
-    }
-
-    private static URI pathTo(String name) {
-		String pwd = System.getProperty("user.dir");
-		String base = "/data/demo-new/";
-		URI uri = URI.createFileURI(pwd + base + name);
-        return uri;
+		testFiles = Files.walk(TESTDIR_PATH)
+			.filter(Files::isReadable)
+			.filter(Files::isRegularFile)
+			.filter(p -> XML_MATCHER.matches(p))
+			.map(path -> Named.of(path.getFileName().toString(), path));
+	}
+	
+	@AfterAll
+	public void tearDown() {
+		testFiles.close();
+	}
+	
+    @TestFactory
+    public Stream<DynamicTest> runTestsFromDirectory() throws IOException {
+    	return stream(testFiles, path -> {
+    		// load model
+    		URI fileUri = URI.createFileURI(path.toAbsolutePath().toString());
+    		Resource resource = resourceSet.getResource(fileUri, true);
+    					
+			// assert correct type
+    		Object nta = EcoreUtil.getObjectByType(resource.getContents(), UppaalPackage.Literals.NTA);
+			assertNotNull(nta, "Could not be parsed to an instance of NTA.");
+			
+			// check for errors
+			EList<Diagnostic> errors = resource.getErrors();
+			assertTrue(errors.isEmpty(), summarize(errors));
+    	});
     }
     
-    private void assertEQ(int expected, int actual, String prefix) {
-    	if (expected != actual) {
-    		throw new AssertionError(prefix + ": expected were'" + expected + "' but got '" + actual + "'");
-    	}
-    }
-    
-    public static Iterable<? extends Object[]> data() {
-        return Arrays.asList(new Object[][] {
-            //  name of the file to pa            The expected amount of syntax errors (Subject to change: aim for 0)
-            //  ^                                 ^ 
-            //  |                                 |   The expected amount of linking errors (Subject to change: aim for 0)
-            //  |                                 |   ^ 
-            { ("2doors.xml")                   ,  0, 30 },
-            { ("bridge.xml")                   ,  1, 20 },
-            { ("fischer_symmetry.xml")         ,  0,  0 },
-            { ("fischer.xml")                  ,  0,  0 },
-            { ("interrupt.xml")                ,  3,  2 },
-            { ("lsc_example.xml")              ,  3,  0 },
-            { ("lsc_train-gate_parameters.xml"),  9,  1 },
-            { ("scheduling3.xml")              , 16,  7 },
-            { ("scheduling4.xml")              , 35,  3 },
-            { ("SchedulingFramework.xml")      , 18, 42 },
-            { ("train-gate-orig.xml")          ,  7, 41 },
-            { ("train-gate.xml")               ,  4,  6 },
-        });
-    }
-
-    private void parserErrorsBelowBoundsInFile(String fileName, int expectedSyntaxErrorCount) {
-    	URI fileToParse = pathTo(fileName);
-        Resource res = loadObjectModel(fileToParse);
-
-        Assertions.assertNotNull(res);
-
-		EList<Diagnostic> errors = res.getErrors();
-		List<Diagnostic> syntaxErrors = errors.stream()
-				.filter(e -> e instanceof XtextSyntaxDiagnostic)
-				.collect(Collectors.toList());
+    private static String summarize(EList<Diagnostic> errors) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("%d errors while parsing:\n", errors.size()));
 		
-		for (Diagnostic d : syntaxErrors) {
-			System.out.println(d.getMessage());
+		Map<Class<? extends Diagnostic>, List<Diagnostic>> mappedErrors
+			= errors.stream().collect(Collectors.groupingBy(Diagnostic::getClass));
+		
+		for (Class<? extends Diagnostic> errorClass : mappedErrors.keySet()) {
+			sb.append(errorClass.getSimpleName());
+			sb.append(":\n");
+			
+			for (Diagnostic error : mappedErrors.get(errorClass)) {
+				sb.append(String.format("[%s:%s:%s]\t%s\n",
+						error.getLocation(),
+						error.getLine(),
+						error.getColumn(),
+						error.getMessage())
+				);
+			}
 		}
 		
-		int actualSyntaxErrorCount = syntaxErrors.size();
-		
-		assertEQ(expectedSyntaxErrorCount, actualSyntaxErrorCount, fileName + "-linking");
-    }
-    
-    private void linkerErrorsBelowBoundsInFile(String fileName, int expectedlinkingErrorCount) {
-    	URI fileToParse = pathTo(fileName);
-        Resource res = loadObjectModel(fileToParse);
-
-        Assertions.assertNotNull(res);
-
-		EList<Diagnostic> errors = res.getErrors();
-
-		List<Diagnostic> linkingErrors = errors.stream()
-				.filter(e -> e instanceof XtextLinkingDiagnostic)
-				.collect(Collectors.toList());
-		
-		int actualLinkingErrorCount = linkingErrors.size();
-		
-		assertEQ(expectedlinkingErrorCount, actualLinkingErrorCount, fileName + "-linking");
-    }
-    
-    @Test
-    public void parserErrorsMatch() {
-    	for(Object[] row : data()) {
-    		System.out.println((String)row[0]);
-    		parserErrorsBelowBoundsInFile((String)row[0], (int)row[1]);
-    	}
-    }
-    
-    @Test
-    public void linkerErrorsMatch() {
-    	for(Object[] row : data()) {
-    		linkerErrorsBelowBoundsInFile((String)row[0], (int)row[2]);
-    	}
-    }
+		return sb.toString();
+	}
 }
