@@ -52,7 +52,12 @@ jobs:
            JavaSE-11
            JavaSE-18
         cache: maven
-    - name: Build with Maven wrapper
+    - name: Run surefire tests with Maven wrapper
       run: ./mvnw -B verify -P ci-build --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload test reports
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: surefire-reports
+        path: ./**/target/surefire-reports/*
