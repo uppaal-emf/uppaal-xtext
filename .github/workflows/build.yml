@@ -37,5 +37,5 @@ jobs:
       run: ./mvnw -B package -P ci-build --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        USERNAME: ${{ github.actor }}
+        GITHUB_ACTOR: ${{ github.actor }}
         
