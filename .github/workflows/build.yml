@@ -42,4 +42,6 @@ jobs:
         macos: ./mvnw -B package -P ci-build --file pom.xml
         windows: mvnw.cmd -B package -P ci-build -f pom.xml
         windowsShell: cmd
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
         
