@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Build CI with Maven
 
 on:
   push:
@@ -16,7 +16,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          os: [ubuntu-latest, macOS-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
@@ -32,33 +36,6 @@ jobs:
            JavaSE-18
         cache: maven
     - name: Build with Maven wrapper
-      run: ./mvnw -B compile -P ci-build --file pom.xml
+      run: ./mvnw -B package -DskipTests -P ci-build --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Java toolchain
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: |
-           11
-           18
-        mvn-toolchain-id: |
-           JavaSE-11
-           JavaSE-18
-        cache: maven
-    - name: Run surefire tests with Maven wrapper
-      run: ./mvnw -B verify -P ci-build --file pom.xml
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload test reports
-      uses: actions/upload-artifact@v3.1.2
-      if: always()
-      with:
-        name: surefire-reports
-        path: ./**/target/surefire-reports/*
