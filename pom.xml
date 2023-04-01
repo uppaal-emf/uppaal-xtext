@@ -320,7 +320,7 @@
 					<configuration>
 						<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
 						<argLine>${platformSystemProperties} ${systemProperties} ${moduleProperties} ${additionalTestArguments}</argLine>
-						<failIfNoTests>false</failIfNoTests>
+						<failIfNoTests>true</failIfNoTests>
 						<useUIHarness>false</useUIHarness>
 					</configuration>
 					<dependencies>
@@ -446,6 +446,28 @@
 			<properties>
 				<moduleProperties><![CDATA[--add-modules=ALL-SYSTEM]]></moduleProperties>
 			</properties>
+		</profile>
+		<profile>
+			<id>ci-build</id>
+			<repositories>
+				 <repository>
+         		 	<id>central</id>
+         		 	<name>Maven Central</name>
+          			<url>https://repo1.maven.org/maven2</url>
+        		</repository>
+				<repository>
+					<id>github-packages</id>
+					<layout>default</layout>
+					<name>GitHub Packages Repo</name>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<url>https://maven.pkg.github.com/uppaal-emf/uppaal-meta-model</url>
+				</repository>
+			</repositories>
 		</profile>
 	</profiles>
 </project>
