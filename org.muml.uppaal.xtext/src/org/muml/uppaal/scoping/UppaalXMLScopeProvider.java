@@ -3,6 +3,7 @@
  */
 package org.muml.uppaal.scoping;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.muml.uppaal.NTA;
 import org.muml.uppaal.core.IdentifiableElement;
 import org.muml.uppaal.core.NamedElement;
 import org.muml.uppaal.core.TypedElement;
+import org.muml.uppaal.declarations.DeclarationsPackage;
 import org.muml.uppaal.declarations.Function;
 import org.muml.uppaal.declarations.SystemDeclarations;
 import org.muml.uppaal.declarations.TypeDeclaration;
@@ -23,6 +25,7 @@ import org.muml.uppaal.declarations.TypedElementContainer;
 import org.muml.uppaal.declarations.Variable;
 import org.muml.uppaal.expressions.DataPrefixExpression;
 import org.muml.uppaal.expressions.Expression;
+import org.muml.uppaal.expressions.ExpressionsPackage;
 import org.muml.uppaal.expressions.FunctionCallExpression;
 import org.muml.uppaal.expressions.IdentifierExpression;
 import org.muml.uppaal.expressions.QuantificationExpression;
@@ -35,7 +38,7 @@ import org.muml.uppaal.templates.TemplatesPackage;
 import org.muml.uppaal.types.DeclaredType;
 import org.muml.uppaal.types.StdLib;
 import org.muml.uppaal.types.StructTypeSpecification;
-import org.muml.uppaal.types.TypesPackage;
+
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
@@ -86,27 +89,27 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			
     @Override
     public IScope getScope(EObject context, EReference reference) {
+    	if (reference == TemplatesPackage.Literals.TEMPLATE__INIT) {
+    		Template template = (Template) context;
+    		return Scopes.scopeFor(template.getLocation());
+    	}
+    	
+    	if (reference == TemplatesPackage.Literals.EDGE__SOURCE) {
+    		Template template = (Template) context.eContainer();
+        	return Scopes.scopeFor(template.getLocation(), getIdentifyableName, IScope.NULLSCOPE);
+    	}
+    	
+    	if (reference == TemplatesPackage.Literals.EDGE__TARGET) {
+    		Template template = (Template) context.eContainer();
+        	return Scopes.scopeFor(template.getLocation(), getIdentifyableName, IScope.NULLSCOPE);
+    	}
+    	
+    	if (reference == ExpressionsPackage.Literals.IDENTIFIER_EXPRESSION__IDENTIFIER) {
+    		final IdentifierExpression expression = (IdentifierExpression) context;
+        	return getIdentifierScope(expression);
+    	}
+    	
         return super.getScope(context,reference);
-    }
-    
-    public IScope scope_Template_init(EObject context, EReference ref) {
-		Template template = (Template) context.eContainer();
-		return Scopes.scopeFor(template.getLocation());
-	}
-    
-    public IScope scope_Edge_source(EObject context, EReference ref) {
-		Template template = (Template) context.eContainer();
-    	return Scopes.scopeFor(template.getLocation(), getIdentifyableName, IScope.NULLSCOPE);
-    }
-    
-    public IScope scope_Edge_target(EObject context, EReference ref) {
-		Template template = (Template) context.eContainer();
-    	return Scopes.scopeFor(template.getLocation(), getIdentifyableName, IScope.NULLSCOPE);
-    }
-    
-    public IScope scope_IdentifierExpression_identifier(EObject context, EReference ref) {
-    	final IdentifierExpression expression = (IdentifierExpression) context;
-    	return getIdentifierScope(expression);
     }
     
     /**
@@ -124,25 +127,25 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 		final UppaalScopingSwitch<IScope> scopingSwitch = new UppaalScopingSwitch<>() {
 			@Override
 			public IScope handleCase(TypeDeclaration declaration) {
-				return conditionalScopeTypes(declaration);
+				if (identifier.eContainingFeature() == DeclarationsPackage.Literals.TYPE_DECLARATION__TYPE_DEFINITION) {
+					return scopeTypes();
+				}
+				
+				return defaultCase(declaration);
 			}
 			
 			@Override
 			public IScope handleCase(TypedElementContainer container) {
-				return conditionalScopeTypes(container);
+				if (identifier.eContainingFeature() == DeclarationsPackage.Literals.TYPED_ELEMENT_CONTAINER__TYPE_DEFINITION) {
+					return scopeTypes();
+				}
+				
+				return defaultCase(container);
 			}
 			
 			@Override 
 			public IScope handleCase(DataPrefixExpression expression) {
 				return scopeTypes();
-			}
-			
-			private IScope conditionalScopeTypes(EObject object) {
-				if (identifier.eContainmentFeature() == TypesPackage.Literals.DECLARED_TYPE__TYPE_DEFINITION) {
-					return scopeTypes();
-				}
-				
-				return defaultCase(object);
 			}
 			
 			private IScope scopeTypes() {
@@ -330,6 +333,11 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			public Iterable<NamedElement> handleCase(QuantificationExpression expression) {
 				return filter(expression.getElements(), NamedElement.class);
 			}
+			
+			@Override
+			public Iterable<NamedElement> defaultCase(EObject obj) {
+				return Collections.emptyList();
+			}
 		};
 		
 		final UppaalScopingSwitch<Iterable<NamedElement>> typedDeclarationSwitch = new UppaalScopingSwitch<>() {
@@ -347,6 +355,11 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			@Override
 			public Iterable<NamedElement> handleCase(SystemDeclarations systemDeclarations) {
 				return reduce(filter(systemDeclarations.getDeclaration(), TypeDeclaration.class), TypeDeclarationReduction);
+			}
+			
+			@Override
+			public Iterable<NamedElement> defaultCase(EObject obj) {
+				return Collections.emptyList();
 			}
 		};
 				
@@ -384,7 +397,6 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			if(curMode == ScopeMode.TYPES_AND_TYPED_ELEMENTS || curMode == ScopeMode.TYPES) {
 				elements = concat(elements, typedDeclarationSwitch.doSwitch(curObj));
 			}
-			
 			
 			// Create a new scope if necessary.
 			if(size(elements) > 0) {

@@ -3,7 +3,6 @@
 	<name>org.muml.uppaal.xtext</name>
 	<comment></comment>
 	<projects>
-		<project>org.muml.uppaal</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

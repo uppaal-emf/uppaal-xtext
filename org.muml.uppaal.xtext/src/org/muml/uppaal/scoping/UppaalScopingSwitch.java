@@ -26,13 +26,11 @@ public class UppaalScopingSwitch<T> extends ComposedSwitch<T> {
 		@Override
 		public T caseSystemDeclarations(SystemDeclarations declarations) {
 			return handleCase(declarations);
-			
 		}
 		
 		@Override
 		public T caseFunction(Function function) {
 			return handleCase(function);
-			
 		}
 		
 		@Override
@@ -167,5 +165,4 @@ public class UppaalScopingSwitch<T> extends ComposedSwitch<T> {
 	public T handleCase(FunctionCallExpression expression) {
 		return defaultCase(expression);
 	}
-	
 }
