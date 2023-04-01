@@ -1,0 +1,44 @@
+name: Test CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+          os: [ubuntu-latest, macOS-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Java toolchain
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: |
+           11
+           18
+        mvn-toolchain-id: |
+           JavaSE-11
+           JavaSE-18
+        cache: maven
+    - name: Build and run surefire tests with Maven wrapper
+      uses: KnicKnic/os-specific-run@v1.0.4
+      with:
+        linux: ./mvnw -B verify --file pom.xml
+        macos: ./mvnw -B verify --file pom.xml
+        windows: mvnw.cmd -B verify -f pom.xml
+        windowsShell: cmd
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload test reports
+      uses: actions/upload-artifact@v3.1.2
+      if: always()
+      with:
+        name: surefire-reports-${{ runner.os }}
+        path: ./**/target/surefire-reports/*
