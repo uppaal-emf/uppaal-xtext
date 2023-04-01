@@ -31,8 +31,11 @@ jobs:
            JavaSE-11
            JavaSE-18
         cache: maven
+    - name: Print settings
+      run: cat ~/.m2/settings.xml
     - name: Build with Maven wrapper
       run: ./mvnw -B package -P ci-build --file pom.xml
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: ${{ github.actor }}
         
