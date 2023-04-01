@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
           os: [ubuntu-latest, macOS-latest, windows-latest]
 
@@ -30,9 +31,9 @@ jobs:
     - name: Build and run surefire tests with Maven wrapper
       uses: KnicKnic/os-specific-run@v1.0.4
       with:
-        linux: ./mvnw -B verify --file pom.xml
-        macos: ./mvnw -B verify --file pom.xml
-        windows: mvnw.cmd -B verify -f pom.xml
+        linux: ./mvnw -B verify -P ci-build --file pom.xml
+        macos: ./mvnw -B verify -P ci-build --file pom.xml
+        windows: mvnw.cmd -B verify -P ci-build -f pom.xml
         windowsShell: cmd
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
