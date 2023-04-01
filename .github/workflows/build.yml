@@ -38,7 +38,21 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Tycho surefire tests
-    - run: ./mvnw -B verify -P ci-build --file pom.xml
+    - uses: actions/checkout@v3
+    - name: Set up Java toolchain
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: |
+           11
+           18
+        mvn-toolchain-id: |
+           JavaSE-11
+           JavaSE-18
+        cache: maven
+    - name: Build with Maven wrapper
+      run: ./mvnw -B verify -P ci-build --file pom.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
