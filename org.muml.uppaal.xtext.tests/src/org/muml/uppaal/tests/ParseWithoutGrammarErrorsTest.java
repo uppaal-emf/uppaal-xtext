@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -41,7 +40,7 @@ import com.google.inject.Inject;
 public class ParseWithoutGrammarErrorsTest {
 	
 	/* Path to test resources */
-	private static final Path TESTDIR_PATH = Path.of("data/demo-new");
+	private static final Path TESTDIR_PATH = Path.of(System.getProperty("TEST_FILES_DIR", "res/tests"));
 	private static final PathMatcher XML_MATCHER = FileSystems.getDefault().getPathMatcher("glob:**.{xml,XML}");
 		
 	@Inject
@@ -79,12 +78,12 @@ public class ParseWithoutGrammarErrorsTest {
 			assertNotNull(nta, "Could not be parsed to an instance of NTA.");
 			
 			// check for errors
-			EList<Diagnostic> errors = resource.getErrors();
+			List<Diagnostic> errors = resource.getErrors();
 			assertTrue(errors.isEmpty(), summarize(errors));
     	});
     }
     
-    private static String summarize(EList<Diagnostic> errors) {
+    private static String summarize(List<Diagnostic> errors) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("%d errors while parsing:\n", errors.size()));
 		
