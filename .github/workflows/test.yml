@@ -1,10 +1,10 @@
-name: Test CI
+name: Test CI with Maven
 
 on:
-  workflow_run:
-    workflows: [Build CI]
-    types:
-      - completed
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   test:
