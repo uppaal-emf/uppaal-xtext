@@ -1,6 +1,7 @@
 package org.muml.uppaal.tests;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.DynamicTest.stream;
 
@@ -29,8 +30,10 @@ import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.muml.uppaal.NTA;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.muml.uppaal.UppaalPackage;
+
+import static org.muml.uppaal.UppaalPackage.Literals;
 
 import com.google.inject.Inject;
 
@@ -72,14 +75,14 @@ public class ParseWithoutGrammarErrorsTest {
     		// load model
     		URI fileUri = URI.createFileURI(path.toAbsolutePath().toString());
     		Resource resource = resourceSet.getResource(fileUri, true);
-    					
-			// assert correct type
-    		Object nta = EcoreUtil.getObjectByType(resource.getContents(), UppaalPackage.Literals.NTA);
-			assertNotNull(nta, "Could not be parsed to an instance of NTA.");
-			
-			// check for errors
-			List<Diagnostic> errors = resource.getErrors();
-			assertTrue(errors.isEmpty(), summarize(errors));
+    		    					
+    		Object nta = EcoreUtil.getObjectByType(resource.getContents(), Literals.NTA);
+    		List<Diagnostic> errors = resource.getErrors();
+    		
+    		assertAll("Parsing assertions",
+    				() -> assertTrue(errors.isEmpty(), summarize(errors)),
+    				() -> assertInstanceOf(NTA.class, nta, "Could not be parsed to an instance of NTA.")
+    		);
     	});
     }
     
