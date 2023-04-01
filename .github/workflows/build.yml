@@ -36,6 +36,11 @@ jobs:
            JavaSE-18
         cache: maven
     - name: Build with Maven wrapper
-      run: ./mvnw -B package -DskipTests -P ci-build --file pom.xml
+      uses: KnicKnic/os-specific-run@v1.0.4
+      with:
+        linux: ./mvnw -B package -DskipTests -P ci-build --file pom.xml
+        macos: ./mvnw -B package -DskipTests -P ci-build --file pom.xml
+        windows: mvnw.cmd -B package -DskipTests -P ci-build -f pom.xml
+        windowsShell: cmd
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
