@@ -36,6 +36,4 @@ jobs:
     - name: Build with Maven wrapper
       run: ./mvnw -B package -P ci-build --file pom.xml
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_ACTOR: ${{ github.actor }}
-        
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
