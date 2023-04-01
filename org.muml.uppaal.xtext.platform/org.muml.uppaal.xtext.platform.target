@@ -19,7 +19,7 @@
 				<dependency>
 					<groupId>org.muml.uppaal</groupId>
 					<artifactId>org.muml.uppaal</artifactId>
-					<version>1.0.0-SNAPSHOT</version>
+					<version>1.0.0.202304011517</version>
 					<type>jar</type>
 				</dependency>
 			</dependencies>
