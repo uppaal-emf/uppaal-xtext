@@ -465,7 +465,7 @@
 					<snapshots>
 						<enabled>false</enabled>
 					</snapshots>
-					<url>https://maven.pkg.github.com/uppaal-emf/uppaal-meta-model</url>
+					<url>https://maven.pkg.github.com/uppaal-emf/uppaal-metamodel</url>
 				</repository>
 			</repositories>
 		</profile>
