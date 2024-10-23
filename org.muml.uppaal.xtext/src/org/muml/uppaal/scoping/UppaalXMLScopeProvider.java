@@ -91,7 +91,7 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
     public IScope getScope(EObject context, EReference reference) {
     	if (reference == TemplatesPackage.Literals.TEMPLATE__INIT) {
     		Template template = (Template) context;
-    		return Scopes.scopeFor(template.getLocation());
+    		return Scopes.scopeFor(template.getLocation(), getIdentifyableName, IScope.NULLSCOPE);
     	}
     	
     	if (reference == TemplatesPackage.Literals.EDGE__SOURCE) {
