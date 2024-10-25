@@ -54,7 +54,7 @@ NTA returns uppaal::NTA hidden(WS):
 	'<' 'system' '>' systemDeclarations=SystemDeclarations '</' 'system' '>'
 
 	// Parse the query declarations.
-	'<' 'queries' '>' (queries+=UppaalQuery)* '</' 'queries' '>'
+	('<' 'queries' '>' (queries+=UppaalQuery)* '</' 'queries' '>')?
 
 	'</' 'nta' '>'
 ;
