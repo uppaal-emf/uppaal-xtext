@@ -4,11 +4,9 @@
 package org.muml.uppaal;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.muml.uppaal.conversion.UppaalValueConverter;
-import org.muml.uppaal.scoping.UppaalLazyLinker;
 import org.muml.uppaal.scoping.UppaalQualifiedNameProvider;
 import org.muml.uppaal.serializer.UppaalTransientValueService;
 
@@ -28,11 +26,6 @@ public class UppaalXMLRuntimeModule extends AbstractUppaalXMLRuntimeModule {
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return UppaalQualifiedNameProvider.class;
-	}
-	 
-	@Override
-	public Class<? extends ILinker> bindILinker() {
-		return UppaalLazyLinker.class;
 	}
 	
 	@Override
