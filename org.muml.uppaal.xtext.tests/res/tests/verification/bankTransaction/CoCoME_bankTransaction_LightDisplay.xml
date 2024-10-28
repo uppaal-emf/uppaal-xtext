@@ -1,0 +1,1329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+	<nta>
+		<declaration>
+chan displayShopItem, displayTotal, displayPaymentCash, displayPaymentCard;
+chan displayShopItemExt, displayTotalExt, displayPaymentCashExt, returnDisplayStringExt;
+chan reset;
+chan fallback;
+bool displayPaymentCardEnabledInLightDisplay = true;
+bool displayShopItemEnabledInLightDisplay = true;
+bool displayTotalEnabledInLightDisplay = true;
+bool displayPaymentCashEnabledInLightDisplay = true;
+chan priority fallback &lt; default;
+		</declaration>
+<template>
+<name>LightDisplay</name>
+<declaration>
+clock c;
+	clock urgentClock;
+</declaration>	
+<location id="LightDisplay_1" x="-24" y="200">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="LightDisplay_2" x="312" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="LightDisplay_3" x="56" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="LightDisplay_4" x="184" y="200">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="LightDisplay_5" x="184" y="128">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="LightDisplay_6" x="504" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="LightDisplay_7" x="352" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="LightDisplay_8" x="-184" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="LightDisplay_9" x="-8" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="LightDisplay_10" x="184" y="56">
+</location>
+<init ref="LightDisplay_10"/>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c == 5</label>
+<nail x="96" y="296"/>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c == 5</label>
+<nail x="504" y="-120"/>
+<nail x="320" y="-120"/>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c == 5</label>
+<nail x="-184" y="-128"/>
+<nail x="40" y="-128"/>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">displayPaymentCardEnabledInLightDisplay</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+<nail x="128" y="-88"/>
+<nail x="240" y="-88"/>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+<nail x="32" y="-56"/>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+<nail x="88" y="200"/>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotalExt!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+<nail x="336" y="-56"/>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">displayTotalEnabledInLightDisplay</label>
+<label kind="synchronisation">displayTotal?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">displayPaymentCashEnabledInLightDisplay</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">displayShopItemEnabledInLightDisplay</label>
+<label kind="synchronisation">displayShopItem?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_1"/>
+<target ref="LightDisplay_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_2"/>
+<target ref="LightDisplay_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_3"/>
+<target ref="LightDisplay_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_4"/>
+<target ref="LightDisplay_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_5"/>
+<target ref="LightDisplay_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_6"/>
+<target ref="LightDisplay_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_7"/>
+<target ref="LightDisplay_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_8"/>
+<target ref="LightDisplay_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_9"/>
+<target ref="LightDisplay_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="synchronisation">returnDisplayStringExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">not displayTotalEnabledInLightDisplay</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="synchronisation">displayPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="synchronisation">displayTotalExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">not displayPaymentCardEnabledInLightDisplay</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="synchronisation">displayShopItemExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">not displayShopItemEnabledInLightDisplay</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">not displayPaymentCashEnabledInLightDisplay</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="LightDisplay_10"/>
+<target ref="LightDisplay_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+</template>
+<template>
+<name>LightDisplayTest</name>
+<declaration>
+clock c;
+	clock urgentClock;
+</declaration>	
+<location id="LightDisplayTest_1" x="-24" y="200">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="LightDisplayTest_2" x="312" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="LightDisplayTest_3" x="56" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="LightDisplayTest_4" x="184" y="200">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="LightDisplayTest_5" x="184" y="128">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="LightDisplayTest_6" x="504" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="LightDisplayTest_7" x="352" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="LightDisplayTest_8" x="-184" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="LightDisplayTest_9" x="-8" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="LightDisplayTest_10" x="184" y="56">
+</location>
+<location id="Err" color="#ff0000">
+	<name>Err</name>
+</location>
+<location id="N" color="#00ff00">
+	<name>N</name>
+</location>
+<init ref="LightDisplayTest_10"/>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_4"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c == 5</label>
+<nail x="96" y="296"/>
+</transition>
+<transition>
+<source ref="LightDisplayTest_6"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c == 5</label>
+<nail x="504" y="-120"/>
+<nail x="320" y="-120"/>
+</transition>
+<transition>
+<source ref="LightDisplayTest_8"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c == 5</label>
+<nail x="-184" y="-128"/>
+<nail x="40" y="-128"/>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="synchronisation">displayPaymentCard!</label>
+<nail x="128" y="-88"/>
+<nail x="240" y="-88"/>
+</transition>
+<transition>
+<source ref="LightDisplayTest_8"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+<nail x="32" y="-56"/>
+</transition>
+<transition>
+<source ref="LightDisplayTest_4"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+<nail x="88" y="200"/>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotalExt?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_6"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+<nail x="336" y="-56"/>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItemExt?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="synchronisation">displayTotal!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="synchronisation">displayPaymentCash!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="synchronisation">displayShopItem!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotalExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotalExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayTotalExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotalExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotalExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="synchronisation">displayTotalExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItemExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItemExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItemExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItemExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItemExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_10"/>
+<target ref="LightDisplayTest_10"/>
+<label kind="synchronisation">displayShopItemExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_1"/>
+<target ref="LightDisplayTest_1"/>
+<label kind="guard">c &gt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_2"/>
+<target ref="LightDisplayTest_2"/>
+<label kind="guard">c &gt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_3"/>
+<target ref="LightDisplayTest_3"/>
+<label kind="guard">c &gt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_8"/>
+<target ref="LightDisplayTest_8"/>
+<label kind="guard">c &gt;= 5</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_4"/>
+<target ref="LightDisplayTest_4"/>
+<label kind="guard">c &gt;= 5</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_5"/>
+<target ref="LightDisplayTest_5"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">displayTotalExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_6"/>
+<target ref="LightDisplayTest_6"/>
+<label kind="guard">c &gt;= 5</label>
+<label kind="synchronisation">returnDisplayStringExt!</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_7"/>
+<target ref="LightDisplayTest_7"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">displayShopItemExt?</label>
+</transition>
+<transition>
+<source ref="LightDisplayTest_9"/>
+<target ref="LightDisplayTest_9"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">displayPaymentCashExt?</label>
+</transition>
+</template>
+<template>
+<name>Fallback</name>
+<declaration>
+</declaration>	
+<location id="fb">
+</location>
+<init ref="fb"/>
+<transition>
+<source ref="fb"/>
+<target ref="fb"/>
+<label kind="synchronisation">fallback!</label>
+</transition>
+</template>
+<template>
+<name>Perturbator</name>
+<declaration>
+</declaration>	
+<location id="pert">
+</location>
+<init ref="pert"/>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+displayPaymentCashEnabledInLightDisplay = (not displayPaymentCashEnabledInLightDisplay)
+</label>
+</transition>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+displayShopItemEnabledInLightDisplay = (not displayShopItemEnabledInLightDisplay)
+</label>
+</transition>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+displayPaymentCardEnabledInLightDisplay = (not displayPaymentCardEnabledInLightDisplay)
+</label>
+</transition>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+displayTotalEnabledInLightDisplay = (not displayTotalEnabledInLightDisplay)
+</label>
+</transition>
+</template>
+		<system>
+system LightDisplay,LightDisplayTest,Fallback,Perturbator;
+		</system>
+	</nta>

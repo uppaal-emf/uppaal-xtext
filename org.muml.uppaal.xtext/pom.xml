@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>org.muml.uppaal.xtext</groupId>
-		<artifactId>org.muml.uppaal.xtext.parent</artifactId>
+		<groupId>org.uppaal.xtext</groupId>
+		<artifactId>org.uppaal.xtext.parent</artifactId>
 		<version>${releaseVersion}${qualifier}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>org.muml.uppaal.xtext</groupId>
-	<artifactId>org.muml.uppaal.xtext</artifactId>
+	<groupId>org.uppaal.xtext</groupId>
+	<artifactId>org.uppaal.xtext</artifactId>
 	<version>${releaseVersion}${qualifier}</version>
 	<packaging>eclipse-plugin</packaging>
 
@@ -35,13 +35,13 @@
 				<configuration>
 					<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
 					<arguments>
-						<argument>${project.baseUri}/src/org/muml/uppaal/GenerateUppaalXML.mwe2</argument>
+						<argument>${project.baseUri}/src/org/uppaal/GenerateUppaalXML.mwe2</argument>
 						<argument>-p</argument>
 						<argument>rootPath=${project.parent.basedir}</argument>
 						<argument>-p</argument>
 						<argument>pluginId=${project.artifactId}</argument>
 						<argument>-p</argument>
-						<argument>modelPluginId=org.muml.uppaal</argument>
+						<argument>modelPluginId=org.uppaal.model</argument>
 					</arguments>
 					<classpathScope>compile</classpathScope>
 					<includePluginDependencies>true</includePluginDependencies>

@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: org.muml.uppaal.xtext
+Automatic-Module-Name: org.uppaal.model.xtext
 Bundle-ManifestVersion: 2
-Bundle-Name: org.muml.uppaal.xtext
+Bundle-Name: org.uppaal.model.xtext
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: org.muml.uppaal.xtext; singleton:=true
+Bundle-SymbolicName: org.uppaal.model.xtext; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.muml.uppaal,
+Require-Bundle: org.uppaal.model,
  org.eclipse.emf.ecore,
  org.eclipse.xtext,
  org.eclipse.xtext.xbase,
@@ -17,13 +17,13 @@ Require-Bundle: org.muml.uppaal,
  org.eclipse.ocl.xtext.completeocl,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.muml.uppaal.validation,
- org.muml.uppaal.scoping,
- org.muml.uppaal,
- org.muml.uppaal.formatting2,
- org.muml.uppaal.serializer,
- org.muml.uppaal.generator,
- org.muml.uppaal.services,
- org.muml.uppaal.parser.antlr,
- org.muml.uppaal.parser.antlr.internal
+Export-Package: org.uppaal.validation,
+ org.uppaal.scoping,
+ org.uppaal,
+ org.uppaal.formatting2,
+ org.uppaal.serializer,
+ org.uppaal.generator,
+ org.uppaal.services,
+ org.uppaal.parser.antlr,
+ org.uppaal.parser.antlr.internal
 Import-Package: org.apache.log4j

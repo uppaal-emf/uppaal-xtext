@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: org.muml.uppaal.xtext.ui
+Automatic-Module-Name: org.uppaal.xtext.ui
 Bundle-ManifestVersion: 2
-Bundle-Name: org.muml.uppaal.xtext.ui
+Bundle-Name: org.uppaal.xtext.ui
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: org.muml.uppaal.xtext.ui; singleton:=true
+Bundle-SymbolicName: org.uppaal.xtext.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.muml.uppaal.xtext,
- org.muml.uppaal.xtext.ide,
- org.muml.uppaal,
+Require-Bundle: org.uppaal.xtext,
+ org.uppaal.xtext.ide,
+ org.uppaal.model,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.ui.codetemplates.ui,
@@ -19,7 +19,7 @@ Require-Bundle: org.muml.uppaal.xtext,
  org.eclipse.xtext.builder
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.muml.uppaal.ui.contentassist,
- org.muml.uppaal.ui.quickfix,
- org.muml.uppaal.xtext.ui.internal
-Bundle-Activator: org.muml.uppaal.xtext.ui.internal.XtextActivator
+Export-Package: org.uppaal.ui.contentassist,
+ org.uppaal.ui.quickfix,
+ org.uppaal.xtext.ui.internal
+Bundle-Activator: org.uppaal.xtext.ui.internal.XtextActivator

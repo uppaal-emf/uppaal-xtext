@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: org.muml.uppaal.xtext.ui.tests
+Automatic-Module-Name: org.uppaal.xtext.ui.tests
 Bundle-ManifestVersion: 2
-Bundle-Name: org.muml.uppaal.xtext.ui.tests
+Bundle-Name: org.uppaal.xtext.ui.tests
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: org.muml.uppaal.xtext.ui.tests; singleton:=true
+Bundle-SymbolicName: org.uppaal.xtext.ui.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.muml.uppaal.xtext.ui,
- org.muml.uppaal,
+Require-Bundle: org.uppaal.xtext.ui,
+ org.uppaal.model,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext.xbase.junit,
@@ -17,4 +17,4 @@ Require-Bundle: org.muml.uppaal.xtext.ui,
 Import-Package: org.junit.jupiter.api;version="[5.1.0,6.0.0)",
  org.junit.jupiter.api.extension;version="[5.1.0,6.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.muml.uppaal.ui.tests;x-internal=true
+Export-Package: org.uppaal.ui.tests;x-internal=true
