@@ -1,4 +1,4 @@
-grammar org.uppaal.model.UppaalXML hidden(WS, SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT)
+grammar org.uppaal.UppaalXML hidden(WS, SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "platform:/resource/org.uppaal.model/model/uppaal.ecore" as uppaal

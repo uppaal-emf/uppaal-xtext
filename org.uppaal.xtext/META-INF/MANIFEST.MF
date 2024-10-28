@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: org.uppaal.model.xtext
+Automatic-Module-Name: org.uppaal.xtext
 Bundle-ManifestVersion: 2
-Bundle-Name: org.uppaal.model.xtext
+Bundle-Name: org.uppaal.xtext
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: org.uppaal.model.xtext; singleton:=true
+Bundle-SymbolicName: org.uppaal.xtext; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.uppaal.model,
  org.eclipse.emf.ecore,

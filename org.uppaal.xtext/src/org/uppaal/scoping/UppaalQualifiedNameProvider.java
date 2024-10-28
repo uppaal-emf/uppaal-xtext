@@ -2,10 +2,10 @@ package org.uppaal.scoping;
 
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.uppaal.model.core.NamedElement;
-import org.uppaal.model.templates.Edge;
-import org.uppaal.model.templates.Location;
-import org.uppaal.model.types.Type;
+import org.uppaal.core.NamedElement;
+import org.uppaal.templates.Edge;
+import org.uppaal.templates.Location;
+import org.uppaal.types.Type;
 
 /**
  * Extracts a {@link org.eclipse.xtext.naming.QualifiedName} for some

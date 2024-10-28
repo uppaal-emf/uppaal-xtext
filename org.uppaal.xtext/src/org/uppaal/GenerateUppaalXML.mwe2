@@ -1,4 +1,4 @@
-module org.uppaal.model.GenerateUppaalXML
+module org.uppaal.GenerateUppaalXML
 
 import org.eclipse.emf.mwe.utils.StandaloneSetup
 import org.eclipse.xtext.xtext.generator.*
@@ -13,7 +13,7 @@ Workflow {
 		platformUri = rootPath
 		scanClassPath = true
 		
-		registerGeneratedEPackage = "${modelPluginId}.UppaalPackage"
+		registerGeneratedEPackage = "org.uppaal.UppaalPackage"
 		registerEcoreFile = "platform:/resource/${modelPluginId}/model/uppaal.ecore"
 		registerGenModelFile = "platform:/resource/${modelPluginId}/model/uppaal.genmodel"
 	}
@@ -44,7 +44,7 @@ Workflow {
 		}
 		
 		language = StandardLanguage {
-			name = "org.uppaal.model.UppaalXML"
+			name = "org.uppaal.UppaalXML"
 			fileExtensions = "xml"
 			referencedResource = "platform:/resource/${modelPluginId}/model/uppaal.genmodel"
 			

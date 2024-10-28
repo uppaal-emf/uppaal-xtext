@@ -5,7 +5,7 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
-import org.uppaal.model.queries.PathType;
+import org.uppaal.queries.PathType;
 
 public class UppaalValueConverter extends DefaultTerminalConverters {
 	public UppaalValueConverter() {

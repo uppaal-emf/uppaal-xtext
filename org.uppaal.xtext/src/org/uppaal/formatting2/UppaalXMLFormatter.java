@@ -5,12 +5,12 @@ package org.uppaal.formatting2;
 
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.uppaal.model.NTA;
-import org.uppaal.model.declarations.ParameterContainer;
-import org.uppaal.model.queries.QueryDescription;
-import org.uppaal.model.templates.Edge;
-import org.uppaal.model.templates.Location;
-import org.uppaal.model.templates.Template;
+import org.uppaal.NTA;
+import org.uppaal.declarations.ParameterContainer;
+import org.uppaal.queries.QueryDescription;
+import org.uppaal.templates.Edge;
+import org.uppaal.templates.Location;
+import org.uppaal.templates.Template;
 
 public class UppaalXMLFormatter extends AbstractJavaFormatter {
 

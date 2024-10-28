@@ -1,25 +1,25 @@
 package org.uppaal.scoping;
 
 import org.eclipse.emf.ecore.util.ComposedSwitch;
-import org.uppaal.model.NTA;
-import org.uppaal.model.declarations.Function;
-import org.uppaal.model.declarations.SystemDeclarations;
-import org.uppaal.model.declarations.TypeDeclaration;
-import org.uppaal.model.declarations.TypedElementContainer;
-import org.uppaal.model.declarations.util.DeclarationsSwitch;
-import org.uppaal.model.expressions.DataPrefixExpression;
-import org.uppaal.model.expressions.FunctionCallExpression;
-import org.uppaal.model.expressions.IdentifierExpression;
-import org.uppaal.model.expressions.QuantificationExpression;
-import org.uppaal.model.expressions.ScopedIdentifierExpression;
-import org.uppaal.model.expressions.util.ExpressionsSwitch;
-import org.uppaal.model.statements.Block;
-import org.uppaal.model.statements.Iteration;
-import org.uppaal.model.statements.util.StatementsSwitch;
-import org.uppaal.model.templates.Edge;
-import org.uppaal.model.templates.Template;
-import org.uppaal.model.templates.util.TemplatesSwitch;
-import org.uppaal.model.util.UppaalSwitch;
+import org.uppaal.NTA;
+import org.uppaal.declarations.Function;
+import org.uppaal.declarations.SystemDeclarations;
+import org.uppaal.declarations.TypeDeclaration;
+import org.uppaal.declarations.TypedElementContainer;
+import org.uppaal.declarations.util.DeclarationsSwitch;
+import org.uppaal.expressions.DataPrefixExpression;
+import org.uppaal.expressions.FunctionCallExpression;
+import org.uppaal.expressions.IdentifierExpression;
+import org.uppaal.expressions.QuantificationExpression;
+import org.uppaal.expressions.ScopedIdentifierExpression;
+import org.uppaal.expressions.util.ExpressionsSwitch;
+import org.uppaal.statements.Block;
+import org.uppaal.statements.Iteration;
+import org.uppaal.statements.util.StatementsSwitch;
+import org.uppaal.templates.Edge;
+import org.uppaal.templates.Template;
+import org.uppaal.templates.util.TemplatesSwitch;
+import org.uppaal.util.UppaalSwitch;
 
 public class UppaalScopingSwitch<T> extends ComposedSwitch<T> {
 	private final DeclarationsSwitch<T> declarationsSwitch = new DeclarationsSwitch<>() {

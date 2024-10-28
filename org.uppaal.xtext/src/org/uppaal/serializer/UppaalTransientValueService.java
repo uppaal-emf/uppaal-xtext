@@ -3,9 +3,9 @@ package org.uppaal.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
-import org.uppaal.model.UppaalPackage;
-import org.uppaal.model.core.CorePackage;
-import org.uppaal.model.templates.TemplatesPackage;
+import org.uppaal.UppaalPackage;
+import org.uppaal.core.CorePackage;
+import org.uppaal.templates.TemplatesPackage;
 
 public class UppaalTransientValueService extends DefaultTransientValueService {
 	public UppaalTransientValueService() {
