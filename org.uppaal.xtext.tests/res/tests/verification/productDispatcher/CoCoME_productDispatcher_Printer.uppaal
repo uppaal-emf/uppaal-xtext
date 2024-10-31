@@ -1,0 +1,1695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uppaal:NTA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:declarations="http://www.uppaal.org/declarations/1.0.0" xmlns:expressions="http://www.uppaal.org/expressions/1.0.0" xmlns:global="http://www.uppaal.org/declarations/global" xmlns:parsable="http://www.uppaal.org/parsable/1.0.0" xmlns:types="http://www.uppaal.org/types/1.0.0" xmlns:uppaal="http://www.uppaal.org/1.0.0" xsi:schemaLocation="http://www.uppaal.org/declarations/1.0.0 http://www.uppaal.org/1.0.0#//declarations http://www.uppaal.org/expressions/1.0.0 http://www.uppaal.org/1.0.0#//expressions http://www.uppaal.org/declarations/global http://www.uppaal.org/1.0.0#//declarations/global http://www.uppaal.org/types/1.0.0 http://www.uppaal.org/1.0.0#//types" name="Parsed_NTA">
+  <globalDeclarations>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="printShopItem"/>
+      <variable xsi:type="declarations:Variable" name="printTotal"/>
+      <variable xsi:type="declarations:Variable" name="printPaymentCash"/>
+      <variable xsi:type="declarations:Variable" name="printPaymentCard"/>
+    </declaration>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="printShopItemExt"/>
+      <variable xsi:type="declarations:Variable" name="printTotalExt"/>
+      <variable xsi:type="declarations:Variable" name="printPaymentCashExt"/>
+      <variable xsi:type="declarations:Variable" name="printPaymentCardExt"/>
+      <variable xsi:type="declarations:Variable" name="returnPrintStringExt"/>
+    </declaration>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="reset"/>
+    </declaration>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="fallback"/>
+    </declaration>
+    <channelPriority>
+      <groups>
+        <items xsi:type="global:ChannelItem">
+          <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+        </items>
+      </groups>
+      <groups>
+        <items xsi:type="global:DefaultItem"/>
+      </groups>
+    </channelPriority>
+  </globalDeclarations>
+  <template name="Printer" init="#//@template.0/@location.9">
+    <declarations>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="c"/>
+      </declaration>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="urgentClock"/>
+      </declaration>
+    </declarations>
+    <location incomingEdges="#//@template.0/@edge.3 #//@template.0/@edge.7 #//@template.0/@edge.20" outgoingEdges="#//@template.0/@edge.0 #//@template.0/@edge.20">
+      <position x="-24" y="200"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.4 #//@template.0/@edge.9 #//@template.0/@edge.21" outgoingEdges="#//@template.0/@edge.1 #//@template.0/@edge.21">
+      <position x="312" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.5 #//@template.0/@edge.6 #//@template.0/@edge.22" outgoingEdges="#//@template.0/@edge.2 #//@template.0/@edge.22">
+      <position x="56" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.8 #//@template.0/@edge.23" outgoingEdges="#//@template.0/@edge.3 #//@template.0/@edge.7 #//@template.0/@edge.23">
+      <position x="184" y="200"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.12 #//@template.0/@edge.24" outgoingEdges="#//@template.0/@edge.8 #//@template.0/@edge.24">
+      <position x="184" y="128"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.10 #//@template.0/@edge.25" outgoingEdges="#//@template.0/@edge.4 #//@template.0/@edge.9 #//@template.0/@edge.25">
+      <position x="504" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.14 #//@template.0/@edge.26" outgoingEdges="#//@template.0/@edge.10 #//@template.0/@edge.26">
+      <position x="352" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.11 #//@template.0/@edge.27" outgoingEdges="#//@template.0/@edge.5 #//@template.0/@edge.6 #//@template.0/@edge.27">
+      <position x="-184" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.13 #//@template.0/@edge.28" outgoingEdges="#//@template.0/@edge.11 #//@template.0/@edge.28">
+      <position x="-8" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.0 #//@template.0/@edge.1 #//@template.0/@edge.2 #//@template.0/@edge.15 #//@template.0/@edge.29" outgoingEdges="#//@template.0/@edge.12 #//@template.0/@edge.13 #//@template.0/@edge.14 #//@template.0/@edge.19 #//@template.0/@edge.29">
+      <position x="184" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.16 #//@template.0/@edge.17 #//@template.0/@edge.30" outgoingEdges="#//@template.0/@edge.15 #//@template.0/@edge.30">
+      <position x="88" y="-176"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.18 #//@template.0/@edge.31" outgoingEdges="#//@template.0/@edge.16 #//@template.0/@edge.17 #//@template.0/@edge.31">
+      <position x="184" y="-288"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.19 #//@template.0/@edge.32" outgoingEdges="#//@template.0/@edge.18 #//@template.0/@edge.32">
+      <position x="184" y="-176"/>
+    </location>
+    <edge source="//@template.0/@location.0" target="//@template.0/@location.9">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.1" target="//@template.0/@location.9">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.2" target="//@template.0/@location.9">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.3" target="//@template.0/@location.0">
+      <bendPoint x="96" y="296"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="//@template.0/@location.5" target="//@template.0/@location.1">
+      <bendPoint x="504" y="-120"/>
+      <bendPoint x="320" y="-120"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="//@template.0/@location.7" target="//@template.0/@location.2">
+      <bendPoint x="-184" y="-128"/>
+      <bendPoint x="40" y="-128"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="//@template.0/@location.7" target="//@template.0/@location.2">
+      <bendPoint x="32" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.3" target="//@template.0/@location.0">
+      <bendPoint x="88" y="200"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.4" target="//@template.0/@location.3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.5" target="//@template.0/@location.1">
+      <bendPoint x="336" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.6" target="//@template.0/@location.5">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.8" target="//@template.0/@location.7">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.4">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.8">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.6">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.10" target="//@template.0/@location.9">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.11" target="//@template.0/@location.10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="//@template.0/@location.11" target="//@template.0/@location.10">
+      <bendPoint x="64" y="-288"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.12" target="//@template.0/@location.11">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.12">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.0" target="//@template.0/@location.0">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.1" target="//@template.0/@location.1">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.2" target="//@template.0/@location.2">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.3" target="//@template.0/@location.3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.4" target="//@template.0/@location.4">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.5" target="//@template.0/@location.5">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.6" target="//@template.0/@location.6">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.7" target="//@template.0/@location.7">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.8" target="//@template.0/@location.8">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.9">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.10" target="//@template.0/@location.10">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.11" target="//@template.0/@location.11">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.12" target="//@template.0/@location.12">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+  </template>
+  <template name="PrinterTest" init="#PrinterTest_10">
+    <declarations>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="c"/>
+      </declaration>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="urgentClock"/>
+      </declaration>
+    </declarations>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.3 #//@template.1/@edge.7 #//@template.1/@edge.98 #//@template.1/@edge.99" outgoingEdges="#//@template.1/@edge.0 #//@template.1/@edge.20 #//@template.1/@edge.33 #//@template.1/@edge.42 #//@template.1/@edge.50 #//@template.1/@edge.58 #//@template.1/@edge.66 #//@template.1/@edge.74 #//@template.1/@edge.82 #//@template.1/@edge.90 #//@template.1/@edge.98 #//@template.1/@edge.99" id="PrinterTest_1">
+      <position x="-24" y="200"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.4 #//@template.1/@edge.9 #//@template.1/@edge.100 #//@template.1/@edge.101" outgoingEdges="#//@template.1/@edge.1 #//@template.1/@edge.21 #//@template.1/@edge.34 #//@template.1/@edge.43 #//@template.1/@edge.51 #//@template.1/@edge.59 #//@template.1/@edge.67 #//@template.1/@edge.75 #//@template.1/@edge.83 #//@template.1/@edge.91 #//@template.1/@edge.100 #//@template.1/@edge.101" id="PrinterTest_2">
+      <position x="312" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.5 #//@template.1/@edge.6 #//@template.1/@edge.102 #//@template.1/@edge.103" outgoingEdges="#//@template.1/@edge.2 #//@template.1/@edge.22 #//@template.1/@edge.35 #//@template.1/@edge.44 #//@template.1/@edge.52 #//@template.1/@edge.60 #//@template.1/@edge.68 #//@template.1/@edge.76 #//@template.1/@edge.84 #//@template.1/@edge.92 #//@template.1/@edge.102 #//@template.1/@edge.103" id="PrinterTest_3">
+      <position x="56" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.8" outgoingEdges="#//@template.1/@edge.3 #//@template.1/@edge.7 #//@template.1/@edge.105 #//@template.1/@edge.115" id="PrinterTest_4">
+      <position x="184" y="200"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.12 #//@template.1/@edge.28" outgoingEdges="#//@template.1/@edge.8 #//@template.1/@edge.23 #//@template.1/@edge.28 #//@template.1/@edge.36 #//@template.1/@edge.45 #//@template.1/@edge.53 #//@template.1/@edge.61 #//@template.1/@edge.77 #//@template.1/@edge.85 #//@template.1/@edge.93 #//@template.1/@edge.106 #//@template.1/@edge.116" id="PrinterTest_5">
+      <position x="184" y="128"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.10" outgoingEdges="#//@template.1/@edge.4 #//@template.1/@edge.9 #//@template.1/@edge.107 #//@template.1/@edge.117" id="PrinterTest_6">
+      <position x="504" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.14 #//@template.1/@edge.29" outgoingEdges="#//@template.1/@edge.10 #//@template.1/@edge.24 #//@template.1/@edge.29 #//@template.1/@edge.37 #//@template.1/@edge.46 #//@template.1/@edge.62 #//@template.1/@edge.69 #//@template.1/@edge.78 #//@template.1/@edge.86 #//@template.1/@edge.94 #//@template.1/@edge.108 #//@template.1/@edge.118" id="PrinterTest_7">
+      <position x="352" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.11" outgoingEdges="#//@template.1/@edge.5 #//@template.1/@edge.6 #//@template.1/@edge.104 #//@template.1/@edge.114" id="PrinterTest_8">
+      <position x="-184" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.13 #//@template.1/@edge.30" outgoingEdges="#//@template.1/@edge.11 #//@template.1/@edge.25 #//@template.1/@edge.30 #//@template.1/@edge.38 #//@template.1/@edge.54 #//@template.1/@edge.63 #//@template.1/@edge.70 #//@template.1/@edge.79 #//@template.1/@edge.87 #//@template.1/@edge.95 #//@template.1/@edge.109 #//@template.1/@edge.119" id="PrinterTest_9">
+      <position x="-8" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.0 #//@template.1/@edge.1 #//@template.1/@edge.2 #//@template.1/@edge.15 #//@template.1/@edge.31" outgoingEdges="#//@template.1/@edge.12 #//@template.1/@edge.13 #//@template.1/@edge.14 #//@template.1/@edge.19 #//@template.1/@edge.31 #//@template.1/@edge.39 #//@template.1/@edge.47 #//@template.1/@edge.55 #//@template.1/@edge.64 #//@template.1/@edge.71 #//@template.1/@edge.120 #//@template.1/@edge.121 #//@template.1/@edge.122 #//@template.1/@edge.125" id="PrinterTest_10">
+      <position x="184" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.16 #//@template.1/@edge.17 #//@template.1/@edge.110 #//@template.1/@edge.111" outgoingEdges="#//@template.1/@edge.15 #//@template.1/@edge.26 #//@template.1/@edge.40 #//@template.1/@edge.48 #//@template.1/@edge.56 #//@template.1/@edge.65 #//@template.1/@edge.72 #//@template.1/@edge.80 #//@template.1/@edge.88 #//@template.1/@edge.96 #//@template.1/@edge.110 #//@template.1/@edge.111" id="PrinterTest_11">
+      <position x="88" y="-176"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.18" outgoingEdges="#//@template.1/@edge.16 #//@template.1/@edge.17 #//@template.1/@edge.112 #//@template.1/@edge.123" id="PrinterTest_12">
+      <position x="184" y="-288"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.19 #//@template.1/@edge.32" outgoingEdges="#//@template.1/@edge.18 #//@template.1/@edge.27 #//@template.1/@edge.32 #//@template.1/@edge.41 #//@template.1/@edge.49 #//@template.1/@edge.57 #//@template.1/@edge.73 #//@template.1/@edge.81 #//@template.1/@edge.89 #//@template.1/@edge.97 #//@template.1/@edge.113 #//@template.1/@edge.124" id="PrinterTest_13">
+      <position x="184" y="-176"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" name="Err" colorCode="#ff0000" incomingEdges="#//@template.1/@edge.20 #//@template.1/@edge.21 #//@template.1/@edge.22 #//@template.1/@edge.23 #//@template.1/@edge.24 #//@template.1/@edge.25 #//@template.1/@edge.26 #//@template.1/@edge.27 #//@template.1/@edge.33 #//@template.1/@edge.34 #//@template.1/@edge.35 #//@template.1/@edge.36 #//@template.1/@edge.37 #//@template.1/@edge.38 #//@template.1/@edge.39 #//@template.1/@edge.40 #//@template.1/@edge.41 #//@template.1/@edge.42 #//@template.1/@edge.43 #//@template.1/@edge.44 #//@template.1/@edge.45 #//@template.1/@edge.46 #//@template.1/@edge.47 #//@template.1/@edge.48 #//@template.1/@edge.49 #//@template.1/@edge.50 #//@template.1/@edge.51 #//@template.1/@edge.52 #//@template.1/@edge.53 #//@template.1/@edge.54 #//@template.1/@edge.55 #//@template.1/@edge.56 #//@template.1/@edge.57 #//@template.1/@edge.58 #//@template.1/@edge.59 #//@template.1/@edge.60 #//@template.1/@edge.61 #//@template.1/@edge.62 #//@template.1/@edge.63 #//@template.1/@edge.64 #//@template.1/@edge.65 #//@template.1/@edge.66 #//@template.1/@edge.67 #//@template.1/@edge.68 #//@template.1/@edge.69 #//@template.1/@edge.70 #//@template.1/@edge.71 #//@template.1/@edge.72 #//@template.1/@edge.73 #//@template.1/@edge.74 #//@template.1/@edge.75 #//@template.1/@edge.76 #//@template.1/@edge.77 #//@template.1/@edge.78 #//@template.1/@edge.79 #//@template.1/@edge.80 #//@template.1/@edge.81 #//@template.1/@edge.82 #//@template.1/@edge.83 #//@template.1/@edge.84 #//@template.1/@edge.85 #//@template.1/@edge.86 #//@template.1/@edge.87 #//@template.1/@edge.88 #//@template.1/@edge.89 #//@template.1/@edge.90 #//@template.1/@edge.91 #//@template.1/@edge.92 #//@template.1/@edge.93 #//@template.1/@edge.94 #//@template.1/@edge.95 #//@template.1/@edge.96 #//@template.1/@edge.97 #//@template.1/@edge.104 #//@template.1/@edge.105 #//@template.1/@edge.106 #//@template.1/@edge.107 #//@template.1/@edge.108 #//@template.1/@edge.109 #//@template.1/@edge.112 #//@template.1/@edge.113 #//@template.1/@edge.138 #//@template.1/@edge.139 #//@template.1/@edge.140 #//@template.1/@edge.141 #//@template.1/@edge.142 #//@template.1/@edge.143 #//@template.1/@edge.144 #//@template.1/@edge.145 #//@template.1/@edge.146 #//@template.1/@edge.147 #//@template.1/@edge.148 #//@template.1/@edge.149" id="Err"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="N" colorCode="#00ff00" incomingEdges="#//@template.1/@edge.126 #//@template.1/@edge.127 #//@template.1/@edge.128 #//@template.1/@edge.129 #//@template.1/@edge.130 #//@template.1/@edge.131 #//@template.1/@edge.132 #//@template.1/@edge.133 #//@template.1/@edge.134 #//@template.1/@edge.135 #//@template.1/@edge.136 #//@template.1/@edge.137" id="N"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.114" outgoingEdges="#//@template.1/@edge.126 #//@template.1/@edge.138" id="Printer_R"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R0" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.115" outgoingEdges="#//@template.1/@edge.127 #//@template.1/@edge.139" id="Printer_R0"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R1" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.116" outgoingEdges="#//@template.1/@edge.128 #//@template.1/@edge.140" id="Printer_R1"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R2" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.117" outgoingEdges="#//@template.1/@edge.129 #//@template.1/@edge.141" id="Printer_R2"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R3" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.118" outgoingEdges="#//@template.1/@edge.130 #//@template.1/@edge.142" id="Printer_R3"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R4" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.119" outgoingEdges="#//@template.1/@edge.131 #//@template.1/@edge.143" id="Printer_R4"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R5" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.120" outgoingEdges="#//@template.1/@edge.132 #//@template.1/@edge.144" id="Printer_R5"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R6" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.121" outgoingEdges="#//@template.1/@edge.133 #//@template.1/@edge.145" id="Printer_R6"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R7" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.122" outgoingEdges="#//@template.1/@edge.134 #//@template.1/@edge.146" id="Printer_R7"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R8" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.123" outgoingEdges="#//@template.1/@edge.135 #//@template.1/@edge.147" id="Printer_R8"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R9" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.124" outgoingEdges="#//@template.1/@edge.136 #//@template.1/@edge.148" id="Printer_R9"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R10" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.125" outgoingEdges="#//@template.1/@edge.137 #//@template.1/@edge.149" id="Printer_R10"/>
+    <edge source="PrinterTest_1" target="PrinterTest_10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="PrinterTest_10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="PrinterTest_10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_4" target="PrinterTest_1">
+      <bendPoint x="96" y="296"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_6" target="PrinterTest_2">
+      <bendPoint x="504" y="-120"/>
+      <bendPoint x="320" y="-120"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_8" target="PrinterTest_3">
+      <bendPoint x="-184" y="-128"/>
+      <bendPoint x="40" y="-128"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_8" target="PrinterTest_3">
+      <bendPoint x="32" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_4" target="PrinterTest_1">
+      <bendPoint x="88" y="200"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="PrinterTest_4">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_6" target="PrinterTest_2">
+      <bendPoint x="336" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="PrinterTest_6">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="PrinterTest_8">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="PrinterTest_5">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="PrinterTest_9">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="PrinterTest_7">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="PrinterTest_10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_12" target="PrinterTest_11">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_12" target="PrinterTest_11">
+      <bendPoint x="64" y="-288"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="PrinterTest_12">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="PrinterTest_13">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="PrinterTest_5">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="PrinterTest_7">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="PrinterTest_9">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="PrinterTest_10">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="PrinterTest_13">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="Err">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="PrinterTest_1">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_1" target="PrinterTest_1">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="PrinterTest_2">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_2" target="PrinterTest_2">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="PrinterTest_3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_3" target="PrinterTest_3">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_8" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_4" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_6" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="PrinterTest_11">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_11" target="PrinterTest_11">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_12" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_13" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="PrinterTest_8" target="Printer_R">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_4" target="Printer_R0">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_5" target="Printer_R1">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_6" target="Printer_R2">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_7" target="Printer_R3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_9" target="Printer_R4">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_10" target="Printer_R5"/>
+    <edge source="PrinterTest_10" target="Printer_R6"/>
+    <edge source="PrinterTest_10" target="Printer_R7"/>
+    <edge source="PrinterTest_12" target="Printer_R8">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_13" target="Printer_R9">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+    </edge>
+    <edge source="PrinterTest_10" target="Printer_R10"/>
+    <edge source="Printer_R" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R0" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R1" target="N">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R2" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R3" target="N">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R4" target="N">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R5" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R6" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R7" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R8" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.4"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R9" target="N">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R10" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R0" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R1" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R2" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R3" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R4" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R5" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R6" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R7" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R8" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R9" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="Printer_R10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+  </template>
+  <template name="Fallback" init="#fb">
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.2/@edge.0" outgoingEdges="#//@template.2/@edge.0" id="fb"/>
+    <edge source="fb" target="fb">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+  </template>
+  <template name="Perturbator" init="#pert">
+    <location xsi:type="parsable:IdentifiableLocation" id="pert"/>
+  </template>
+  <systemDeclarations>
+    <system>
+      <instantiationList template="#//@template.0 #//@template.1 #//@template.2 #//@template.3"/>
+    </system>
+  </systemDeclarations>
+</uppaal:NTA>

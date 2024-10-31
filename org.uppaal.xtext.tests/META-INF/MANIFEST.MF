@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.uppaal.xtext.tests
+Bundle-ManifestVersion: 2
+Bundle-Name: org.uppaal.xtext.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.uppaal.xtext.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.uppaal.xtext,
+ org.uppaal.model,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+Import-Package: org.opentest4j,
+ org.junit.jupiter.api;version="[5.8.0,6.0.0)",
+ org.junit.jupiter.api.extension;version="[5.8.0,6.0.0)",
+ org.junit.jupiter.api.function;version="[5.8.0,6.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.uppaal.tests;x-internal=true

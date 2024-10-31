@@ -1,0 +1,1815 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+	<nta>
+		<declaration>
+chan printShopItem, printTotal, printPaymentCash, printPaymentCard;
+chan printShopItemExt, printTotalExt, printPaymentCashExt, printPaymentCardExt, returnPrintStringExt;
+chan reset;
+chan fallback;
+bool printPaymentCardEnabledInPrinter = true;
+bool printTotalEnabledInPrinter = true;
+bool printPaymentCashEnabledInPrinter = true;
+bool printShopItemEnabledInPrinter = true;
+chan priority fallback &lt; default;
+		</declaration>
+<template>
+<name>Printer</name>
+<declaration>
+clock c;
+	clock urgentClock;
+</declaration>	
+<location id="Printer_1" x="-24" y="200">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="Printer_2" x="312" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="Printer_3" x="56" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="Printer_4" x="184" y="200">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="Printer_5" x="184" y="128">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="Printer_6" x="504" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="Printer_7" x="352" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="Printer_8" x="-184" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="Printer_9" x="-8" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="Printer_10" x="184" y="56">
+</location>
+<location id="Printer_11" x="88" y="-176">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="Printer_12" x="184" y="-288">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="Printer_13" x="184" y="-176">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<init ref="Printer_10"/>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_1"/>
+<label kind="guard">c == 5</label>
+<nail x="96" y="296"/>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_2"/>
+<label kind="guard">c == 5</label>
+<nail x="504" y="-120"/>
+<nail x="320" y="-120"/>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_3"/>
+<label kind="guard">c == 5</label>
+<nail x="-184" y="-128"/>
+<nail x="40" y="-128"/>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+<nail x="32" y="-56"/>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+<nail x="88" y="200"/>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+<nail x="336" y="-56"/>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_5"/>
+<label kind="guard">printTotalEnabledInPrinter</label>
+<label kind="synchronisation">printTotal?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_9"/>
+<label kind="guard">printPaymentCashEnabledInPrinter</label>
+<label kind="synchronisation">printPaymentCash?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_7"/>
+<label kind="guard">printShopItemEnabledInPrinter</label>
+<label kind="synchronisation">printShopItem?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_11"/>
+<label kind="guard">c == 5</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+<nail x="64" y="-288"/>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_12"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_13"/>
+<label kind="guard">printPaymentCardEnabledInPrinter</label>
+<label kind="synchronisation">printPaymentCard?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_1"/>
+<target ref="Printer_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_2"/>
+<target ref="Printer_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_3"/>
+<target ref="Printer_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c == 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_4"/>
+<target ref="Printer_4"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_5"/>
+<target ref="Printer_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_6"/>
+<target ref="Printer_6"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_7"/>
+<target ref="Printer_7"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c == 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_8"/>
+<target ref="Printer_8"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_9"/>
+<target ref="Printer_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">not printTotalEnabledInPrinter</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">not printPaymentCardEnabledInPrinter</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">not printPaymentCashEnabledInPrinter</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">not printShopItemEnabledInPrinter</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="guard">false</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_10"/>
+<target ref="Printer_10"/>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_11"/>
+<target ref="Printer_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c == 5</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_12"/>
+<target ref="Printer_12"/>
+<label kind="guard">c &lt;= 5</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt?</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt!</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset!</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt!</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt!</label>
+</transition>
+<transition>
+<source ref="Printer_13"/>
+<target ref="Printer_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt!</label>
+</transition>
+</template>
+<template>
+<name>PrinterTest</name>
+<declaration>
+clock c;
+	clock urgentClock;
+</declaration>	
+<location id="PrinterTest_1" x="-24" y="200">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="PrinterTest_2" x="312" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="PrinterTest_3" x="56" y="-72">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="PrinterTest_4" x="184" y="200">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="PrinterTest_5" x="184" y="128">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="PrinterTest_6" x="504" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="PrinterTest_7" x="352" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="PrinterTest_8" x="-184" y="56">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="PrinterTest_9" x="-8" y="56">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="PrinterTest_10" x="184" y="56">
+</location>
+<location id="PrinterTest_11" x="88" y="-176">
+	<label kind="invariant">c &lt;= 6</label>
+</location>
+<location id="PrinterTest_12" x="184" y="-288">
+	<label kind="invariant">c &lt;= 5</label>
+</location>
+<location id="PrinterTest_13" x="184" y="-176">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="Err" color="#ff0000">
+	<name>Err</name>
+</location>
+<location id="N" color="#00ff00">
+	<name>N</name>
+</location>
+<init ref="PrinterTest_10"/>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_4"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c == 5</label>
+<nail x="96" y="296"/>
+</transition>
+<transition>
+<source ref="PrinterTest_6"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c == 5</label>
+<nail x="504" y="-120"/>
+<nail x="320" y="-120"/>
+</transition>
+<transition>
+<source ref="PrinterTest_8"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c == 5</label>
+<nail x="-184" y="-128"/>
+<nail x="40" y="-128"/>
+</transition>
+<transition>
+<source ref="PrinterTest_8"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+<nail x="32" y="-56"/>
+</transition>
+<transition>
+<source ref="PrinterTest_4"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+<nail x="88" y="200"/>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_6"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+<nail x="336" y="-56"/>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_5"/>
+<label kind="synchronisation">printTotal!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_9"/>
+<label kind="synchronisation">printPaymentCash!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_7"/>
+<label kind="synchronisation">printShopItem!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_10"/>
+<label kind="guard">c == 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_12"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c == 5</label>
+</transition>
+<transition>
+<source ref="PrinterTest_12"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt; 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+<nail x="64" y="-288"/>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_12"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_13"/>
+<label kind="synchronisation">printPaymentCard!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_10"/>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_10"/>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_10"/>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_10"/>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_10"/>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_10"/>
+<target ref="PrinterTest_10"/>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt;= 6</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_1"/>
+<target ref="PrinterTest_1"/>
+<label kind="guard">c &gt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_2"/>
+<target ref="PrinterTest_2"/>
+<label kind="guard">c &gt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_3"/>
+<target ref="PrinterTest_3"/>
+<label kind="guard">c &gt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_8"/>
+<target ref="PrinterTest_8"/>
+<label kind="guard">c &gt;= 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_4"/>
+<target ref="PrinterTest_4"/>
+<label kind="guard">c &gt;= 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_5"/>
+<target ref="PrinterTest_5"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printTotalExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_6"/>
+<target ref="PrinterTest_6"/>
+<label kind="guard">c &gt;= 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_7"/>
+<target ref="PrinterTest_7"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printShopItemExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_9"/>
+<target ref="PrinterTest_9"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printPaymentCashExt?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &lt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_11"/>
+<target ref="PrinterTest_11"/>
+<label kind="guard">c &gt; 6</label>
+<label kind="synchronisation">reset?</label>
+</transition>
+<transition>
+<source ref="PrinterTest_12"/>
+<target ref="PrinterTest_12"/>
+<label kind="guard">c &gt;= 5</label>
+<label kind="synchronisation">returnPrintStringExt!</label>
+</transition>
+<transition>
+<source ref="PrinterTest_13"/>
+<target ref="PrinterTest_13"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printPaymentCardExt?</label>
+</transition>
+</template>
+<template>
+<name>Fallback</name>
+<declaration>
+</declaration>	
+<location id="fb">
+</location>
+<init ref="fb"/>
+<transition>
+<source ref="fb"/>
+<target ref="fb"/>
+<label kind="synchronisation">fallback!</label>
+</transition>
+</template>
+<template>
+<name>Perturbator</name>
+<declaration>
+</declaration>	
+<location id="pert">
+</location>
+<init ref="pert"/>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+printTotalEnabledInPrinter = (not printTotalEnabledInPrinter)
+</label>
+</transition>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+printShopItemEnabledInPrinter = (not printShopItemEnabledInPrinter)
+</label>
+</transition>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+printPaymentCashEnabledInPrinter = (not printPaymentCashEnabledInPrinter)
+</label>
+</transition>
+<transition>
+<source ref="pert"/>
+<target ref="pert"/>
+<label kind="assignment">
+printPaymentCardEnabledInPrinter = (not printPaymentCardEnabledInPrinter)
+</label>
+</transition>
+</template>
+		<system>
+system Printer,PrinterTest,Fallback,Perturbator;
+		</system>
+	</nta>

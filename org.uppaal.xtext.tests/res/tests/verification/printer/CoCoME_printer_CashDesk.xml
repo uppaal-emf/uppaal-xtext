@@ -1,0 +1,3505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+	<nta>
+		<declaration>
+chan displayShopItem, displayTotal, displayPaymentCash, displayPaymentCard;
+chan requestTransaction, returnAcknowledgement;
+chan printShopItem, printTotal, printPaymentCard, printPaymentCash;
+chan getProductWithStockItem, returnProductWithStockItem, bookSale;
+chan readBarcode;
+chan startNewSale, completeItemRegistration, acknowledgeCashPayment, returnBoolean;
+chan readCardNumber, readPIN;
+chan fallback;
+chan priority fallback &lt; default;
+		</declaration>
+<template>
+<name>CashDesk</name>
+<declaration>
+clock c;
+	clock urgentClock;
+</declaration>	
+<location id="CashDesk_1" x="-488" y="-224">
+</location>
+<location id="CashDesk_2" x="-608" y="-224">
+</location>
+<location id="CashDesk_3" x="-112" y="-304">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="CashDesk_4" x="-608" y="-352">
+</location>
+<location id="CashDesk_5" x="-112" y="-392">
+</location>
+<location id="CashDesk_6" x="-344" y="-352">
+</location>
+<location id="CashDesk_7" x="-344" y="-408">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="CashDesk_8" x="-344" y="-488">
+</location>
+<location id="CashDesk_9" x="-608" y="-488">
+</location>
+<location id="CashDesk_10" x="-608" y="-640">
+</location>
+<location id="CashDesk_11" x="-112" y="-640">
+</location>
+<location id="CashDesk_12" x="-112" y="-488">
+</location>
+<location id="CashDesk_13" x="-112" y="-112">
+</location>
+<location id="CashDesk_14" x="80" y="-112">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="CashDesk_15" x="80" y="-168">
+</location>
+<location id="CashDesk_16" x="80" y="-224">
+</location>
+<location id="CashDesk_17" x="-112" y="-224">
+</location>
+<location id="CashDesk_18" x="-344" y="-224">
+</location>
+<location id="CashDesk_19" x="-344" y="-296">
+</location>
+<init ref="CashDesk_18"/>
+<transition>
+<source ref="CashDesk_15"/>
+<target ref="CashDesk_16"/>
+<label kind="guard">c &gt;= 100</label>
+<label kind="synchronisation">readBarcode?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+<nail x="16" y="-184"/>
+</transition>
+<transition>
+<source ref="CashDesk_4"/>
+<target ref="CashDesk_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_2"/>
+<target ref="CashDesk_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_5"/>
+<target ref="CashDesk_12"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_19"/>
+<target ref="CashDesk_18"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_7"/>
+<target ref="CashDesk_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_8"/>
+<target ref="CashDesk_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_12"/>
+<target ref="CashDesk_8"/>
+<label kind="synchronisation">acknowledgeCashPayment?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_9"/>
+<target ref="CashDesk_4"/>
+<label kind="guard">c &lt;= 2000</label>
+<label kind="synchronisation">returnAcknowledgement?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_10"/>
+<target ref="CashDesk_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_11"/>
+<target ref="CashDesk_10"/>
+<label kind="synchronisation">readPIN?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_1"/>
+<target ref="CashDesk_18"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_12"/>
+<target ref="CashDesk_11"/>
+<label kind="synchronisation">readCardNumber?</label>
+</transition>
+<transition>
+<source ref="CashDesk_3"/>
+<target ref="CashDesk_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_17"/>
+<target ref="CashDesk_3"/>
+<label kind="synchronisation">completeItemRegistration?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_13"/>
+<target ref="CashDesk_17"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_14"/>
+<target ref="CashDesk_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_15"/>
+<target ref="CashDesk_14"/>
+<label kind="guard">c &lt; 100</label>
+<label kind="synchronisation">returnProductWithStockItem?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_16"/>
+<target ref="CashDesk_15"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem!</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_17"/>
+<target ref="CashDesk_16"/>
+<label kind="synchronisation">readBarcode?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_18"/>
+<target ref="CashDesk_17"/>
+<label kind="synchronisation">startNewSale?</label>
+</transition>
+<transition>
+<source ref="CashDesk_4"/>
+<target ref="CashDesk_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_6"/>
+<target ref="CashDesk_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDesk_9"/>
+<target ref="CashDesk_11"/>
+<label kind="guard">c &gt; 2000</label>
+<label kind="synchronisation">readCardNumber?</label>
+</transition>
+<transition>
+<source ref="CashDesk_4"/>
+<target ref="CashDesk_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+<nail x="-792" y="-352"/>
+<nail x="-792" y="-640"/>
+</transition>
+<transition>
+<source ref="CashDesk_1"/>
+<target ref="CashDesk_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_1"/>
+<target ref="CashDesk_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_1"/>
+<target ref="CashDesk_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_1"/>
+<target ref="CashDesk_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_2"/>
+<target ref="CashDesk_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_2"/>
+<target ref="CashDesk_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_2"/>
+<target ref="CashDesk_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_2"/>
+<target ref="CashDesk_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_3"/>
+<target ref="CashDesk_3"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_3"/>
+<target ref="CashDesk_3"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_3"/>
+<target ref="CashDesk_3"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_3"/>
+<target ref="CashDesk_3"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_4"/>
+<target ref="CashDesk_4"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_4"/>
+<target ref="CashDesk_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_4"/>
+<target ref="CashDesk_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_4"/>
+<target ref="CashDesk_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_5"/>
+<target ref="CashDesk_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_5"/>
+<target ref="CashDesk_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_5"/>
+<target ref="CashDesk_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_5"/>
+<target ref="CashDesk_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_6"/>
+<target ref="CashDesk_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_6"/>
+<target ref="CashDesk_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_6"/>
+<target ref="CashDesk_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_6"/>
+<target ref="CashDesk_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_7"/>
+<target ref="CashDesk_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_7"/>
+<target ref="CashDesk_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_7"/>
+<target ref="CashDesk_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_7"/>
+<target ref="CashDesk_7"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_8"/>
+<target ref="CashDesk_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_8"/>
+<target ref="CashDesk_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_8"/>
+<target ref="CashDesk_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_8"/>
+<target ref="CashDesk_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_9"/>
+<target ref="CashDesk_9"/>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_9"/>
+<target ref="CashDesk_9"/>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_9"/>
+<target ref="CashDesk_9"/>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_9"/>
+<target ref="CashDesk_9"/>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_10"/>
+<target ref="CashDesk_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_10"/>
+<target ref="CashDesk_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_10"/>
+<target ref="CashDesk_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_10"/>
+<target ref="CashDesk_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_11"/>
+<target ref="CashDesk_11"/>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_11"/>
+<target ref="CashDesk_11"/>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_11"/>
+<target ref="CashDesk_11"/>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_11"/>
+<target ref="CashDesk_11"/>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_12"/>
+<target ref="CashDesk_12"/>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_12"/>
+<target ref="CashDesk_12"/>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_12"/>
+<target ref="CashDesk_12"/>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_12"/>
+<target ref="CashDesk_12"/>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_13"/>
+<target ref="CashDesk_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_13"/>
+<target ref="CashDesk_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_13"/>
+<target ref="CashDesk_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_13"/>
+<target ref="CashDesk_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_14"/>
+<target ref="CashDesk_14"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_14"/>
+<target ref="CashDesk_14"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_14"/>
+<target ref="CashDesk_14"/>
+<label kind="guard">false and urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_14"/>
+<target ref="CashDesk_14"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_15"/>
+<target ref="CashDesk_15"/>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_15"/>
+<target ref="CashDesk_15"/>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_15"/>
+<target ref="CashDesk_15"/>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_15"/>
+<target ref="CashDesk_15"/>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_16"/>
+<target ref="CashDesk_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_16"/>
+<target ref="CashDesk_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_16"/>
+<target ref="CashDesk_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_16"/>
+<target ref="CashDesk_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_17"/>
+<target ref="CashDesk_17"/>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_17"/>
+<target ref="CashDesk_17"/>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_17"/>
+<target ref="CashDesk_17"/>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_17"/>
+<target ref="CashDesk_17"/>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_18"/>
+<target ref="CashDesk_18"/>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_18"/>
+<target ref="CashDesk_18"/>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_18"/>
+<target ref="CashDesk_18"/>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_18"/>
+<target ref="CashDesk_18"/>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+<transition>
+<source ref="CashDesk_19"/>
+<target ref="CashDesk_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard!</label>
+</transition>
+<transition>
+<source ref="CashDesk_19"/>
+<target ref="CashDesk_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal!</label>
+</transition>
+<transition>
+<source ref="CashDesk_19"/>
+<target ref="CashDesk_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_19"/>
+<target ref="CashDesk_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash!</label>
+</transition>
+</template>
+<template>
+<name>CashDeskTest</name>
+<declaration>
+clock c;
+	clock urgentClock;
+</declaration>	
+<location id="CashDeskTest_1" x="-488" y="-224">
+</location>
+<location id="CashDeskTest_2" x="-608" y="-224">
+</location>
+<location id="CashDeskTest_3" x="-112" y="-304">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="CashDeskTest_4" x="-608" y="-352">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="CashDeskTest_5" x="-112" y="-392">
+</location>
+<location id="CashDeskTest_6" x="-344" y="-352">
+</location>
+<location id="CashDeskTest_7" x="-344" y="-408">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="CashDeskTest_8" x="-344" y="-488">
+</location>
+<location id="CashDeskTest_9" x="-608" y="-488">
+</location>
+<location id="CashDeskTest_10" x="-608" y="-640">
+</location>
+<location id="CashDeskTest_11" x="-112" y="-640">
+</location>
+<location id="CashDeskTest_12" x="-112" y="-488">
+</location>
+<location id="CashDeskTest_13" x="-112" y="-112">
+</location>
+<location id="CashDeskTest_14" x="80" y="-112">
+	<label kind="invariant">urgentClock &lt;= 0</label>
+</location>
+<location id="CashDeskTest_15" x="80" y="-168">
+</location>
+<location id="CashDeskTest_16" x="80" y="-224">
+</location>
+<location id="CashDeskTest_17" x="-112" y="-224">
+</location>
+<location id="CashDeskTest_18" x="-344" y="-224">
+</location>
+<location id="CashDeskTest_19" x="-344" y="-296">
+</location>
+<location id="Err" color="#ff0000">
+	<name>Err</name>
+</location>
+<location id="N" color="#00ff00">
+	<name>N</name>
+</location>
+<location id="CashDesk_R">
+	<name>R</name>
+	<committed/>
+</location>
+<location id="CashDesk_R0">
+	<name>R0</name>
+	<committed/>
+</location>
+<location id="CashDesk_R1">
+	<name>R1</name>
+	<committed/>
+</location>
+<location id="CashDesk_R2">
+	<name>R2</name>
+	<committed/>
+</location>
+<location id="CashDesk_R3">
+	<name>R3</name>
+	<committed/>
+</location>
+<location id="CashDesk_R4">
+	<name>R4</name>
+	<committed/>
+</location>
+<location id="CashDesk_R5">
+	<name>R5</name>
+	<committed/>
+</location>
+<location id="CashDesk_R6">
+	<name>R6</name>
+	<committed/>
+</location>
+<location id="CashDesk_R7">
+	<name>R7</name>
+	<committed/>
+</location>
+<location id="CashDesk_R8">
+	<name>R8</name>
+	<committed/>
+</location>
+<location id="CashDesk_R9">
+	<name>R9</name>
+	<committed/>
+</location>
+<location id="CashDesk_R10">
+	<name>R10</name>
+	<committed/>
+</location>
+<location id="CashDesk_R11">
+	<name>R11</name>
+	<committed/>
+</location>
+<location id="CashDesk_R12">
+	<name>R12</name>
+	<committed/>
+</location>
+<location id="CashDesk_R13">
+	<name>R13</name>
+	<committed/>
+</location>
+<location id="CashDesk_R14">
+	<name>R14</name>
+	<committed/>
+</location>
+<location id="CashDesk_R15">
+	<name>R15</name>
+	<committed/>
+</location>
+<location id="CashDesk_R16">
+	<name>R16</name>
+	<committed/>
+</location>
+<location id="CashDesk_R17">
+	<name>R17</name>
+	<committed/>
+</location>
+<location id="CashDesk_R18">
+	<name>R18</name>
+	<committed/>
+</location>
+<location id="CashDesk_R19">
+	<name>R19</name>
+	<committed/>
+</location>
+<init ref="CashDeskTest_18"/>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDeskTest_16"/>
+<label kind="guard">c &gt;= 100</label>
+<label kind="synchronisation">readBarcode!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+<nail x="16" y="-184"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDeskTest_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="CashDeskTest_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="CashDeskTest_12"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="CashDeskTest_18"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="CashDeskTest_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="CashDeskTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDeskTest_8"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDeskTest_4"/>
+<label kind="guard">c &lt;= 2000</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="CashDeskTest_9"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="CashDeskTest_10"/>
+<label kind="synchronisation">readPIN!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="CashDeskTest_18"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDeskTest_11"/>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="CashDeskTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDeskTest_3"/>
+<label kind="synchronisation">completeItemRegistration!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="CashDeskTest_17"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="CashDeskTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDeskTest_14"/>
+<label kind="guard">c &lt; 100</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="CashDeskTest_15"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+<label kind="assignment">
+c = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDeskTest_16"/>
+<label kind="synchronisation">readBarcode!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="CashDeskTest_17"/>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDeskTest_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="CashDeskTest_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDeskTest_11"/>
+<label kind="guard">c &gt; 2000</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDeskTest_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+<label kind="assignment">
+urgentClock = 0
+</label>
+<nail x="-792" y="-352"/>
+<nail x="-792" y="-640"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="CashDeskTest_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="CashDeskTest_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="CashDeskTest_3"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="CashDeskTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="CashDeskTest_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="CashDeskTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="CashDeskTest_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDeskTest_9"/>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="CashDeskTest_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="CashDeskTest_11"/>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDeskTest_12"/>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="CashDeskTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="CashDeskTest_14"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDeskTest_15"/>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="CashDeskTest_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDeskTest_17"/>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="CashDeskTest_18"/>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="CashDeskTest_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="CashDeskTest_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="CashDeskTest_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDeskTest_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="CashDeskTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="CashDeskTest_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="CashDeskTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="CashDeskTest_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDeskTest_9"/>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="CashDeskTest_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="CashDeskTest_11"/>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDeskTest_12"/>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="CashDeskTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="CashDeskTest_14"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDeskTest_15"/>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="CashDeskTest_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDeskTest_17"/>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="CashDeskTest_18"/>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="CashDeskTest_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="CashDeskTest_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="CashDeskTest_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="CashDeskTest_3"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDeskTest_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="CashDeskTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="CashDeskTest_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="CashDeskTest_7"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="CashDeskTest_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDeskTest_9"/>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="CashDeskTest_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="CashDeskTest_11"/>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDeskTest_12"/>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="CashDeskTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDeskTest_15"/>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="CashDeskTest_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDeskTest_17"/>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="CashDeskTest_18"/>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="CashDeskTest_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="CashDeskTest_1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="CashDeskTest_2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="CashDeskTest_3"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDeskTest_4"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="CashDeskTest_5"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="CashDeskTest_6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="CashDeskTest_8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDeskTest_9"/>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="CashDeskTest_10"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="CashDeskTest_11"/>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDeskTest_12"/>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="CashDeskTest_13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="CashDeskTest_14"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDeskTest_15"/>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="CashDeskTest_16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDeskTest_17"/>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="CashDeskTest_18"/>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="CashDeskTest_19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="Err"/>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="guard">c &lt; 100</label>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDeskTest_4"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">displayPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_7"/>
+<target ref="CashDeskTest_7"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">displayPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="guard">c &gt; 2000</label>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_3"/>
+<target ref="CashDeskTest_3"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">displayTotal?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_14"/>
+<target ref="CashDeskTest_14"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">displayShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="Err"/>
+<label kind="guard">c &gt;= 100</label>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="Err"/>
+<label kind="guard">c &lt;= 2000</label>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="Err"/>
+<label kind="guard">urgentClock &gt; 0</label>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDesk_R"/>
+<label kind="guard">c &gt;= 100</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_2"/>
+<target ref="CashDesk_R0"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_5"/>
+<target ref="CashDesk_R1"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_19"/>
+<target ref="CashDesk_R2"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_8"/>
+<target ref="CashDesk_R3"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDesk_R4"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDesk_R5"/>
+<label kind="guard">c &lt;= 2000</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_10"/>
+<target ref="CashDesk_R6"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_11"/>
+<target ref="CashDesk_R7"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_1"/>
+<target ref="CashDesk_R8"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_12"/>
+<target ref="CashDesk_R9"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDesk_R10"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_13"/>
+<target ref="CashDesk_R11"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_15"/>
+<target ref="CashDesk_R12"/>
+<label kind="guard">c &lt; 100</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_16"/>
+<target ref="CashDesk_R13"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_17"/>
+<target ref="CashDesk_R14"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_18"/>
+<target ref="CashDesk_R15"/>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDesk_R16"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_6"/>
+<target ref="CashDesk_R17"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_9"/>
+<target ref="CashDesk_R18"/>
+<label kind="guard">c &gt; 2000</label>
+</transition>
+<transition>
+<source ref="CashDeskTest_4"/>
+<target ref="CashDesk_R19"/>
+<label kind="guard">urgentClock &lt;= 0</label>
+</transition>
+<transition>
+<source ref="CashDesk_R"/>
+<target ref="N"/>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R0"/>
+<target ref="N"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R1"/>
+<target ref="N"/>
+<label kind="synchronisation">printTotal?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R2"/>
+<target ref="N"/>
+<label kind="synchronisation">printPaymentCash?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R3"/>
+<target ref="N"/>
+<label kind="synchronisation">returnBoolean?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R4"/>
+<target ref="N"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R5"/>
+<target ref="N"/>
+<label kind="synchronisation">returnAcknowledgement!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R6"/>
+<target ref="N"/>
+<label kind="synchronisation">requestTransaction?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R7"/>
+<target ref="N"/>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R8"/>
+<target ref="N"/>
+<label kind="synchronisation">printPaymentCard?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R9"/>
+<target ref="N"/>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R10"/>
+<target ref="N"/>
+<label kind="synchronisation">completeItemRegistration!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R11"/>
+<target ref="N"/>
+<label kind="synchronisation">printShopItem?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R12"/>
+<target ref="N"/>
+<label kind="synchronisation">returnProductWithStockItem!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R13"/>
+<target ref="N"/>
+<label kind="synchronisation">getProductWithStockItem?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R14"/>
+<target ref="N"/>
+<label kind="synchronisation">readBarcode!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R15"/>
+<target ref="N"/>
+<label kind="synchronisation">startNewSale!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R16"/>
+<target ref="N"/>
+<label kind="synchronisation">acknowledgeCashPayment!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R17"/>
+<target ref="N"/>
+<label kind="synchronisation">bookSale?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R18"/>
+<target ref="N"/>
+<label kind="synchronisation">readCardNumber!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R19"/>
+<target ref="N"/>
+<label kind="synchronisation">readPIN!</label>
+</transition>
+<transition>
+<source ref="CashDesk_R"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R0"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R1"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R2"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R3"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R4"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R5"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R6"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R7"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R8"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R9"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R10"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R11"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R12"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R13"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R14"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R15"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R16"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R17"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R18"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+<transition>
+<source ref="CashDesk_R19"/>
+<target ref="Err"/>
+<label kind="synchronisation">fallback?</label>
+</transition>
+</template>
+<template>
+<name>Fallback</name>
+<declaration>
+</declaration>	
+<location id="fb">
+</location>
+<init ref="fb"/>
+<transition>
+<source ref="fb"/>
+<target ref="fb"/>
+<label kind="synchronisation">fallback!</label>
+</transition>
+</template>
+<template>
+<name>Perturbator</name>
+<declaration>
+</declaration>	
+<location id="pert">
+</location>
+<init ref="pert"/>
+</template>
+		<system>
+system CashDesk,CashDeskTest,Fallback,Perturbator;
+		</system>
+	</nta>

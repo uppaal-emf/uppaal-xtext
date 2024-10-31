@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+
+chan displayShopItem, displayTotal, displayPaymentCash, displayPaymentCard;
+
+chan requestTransaction, returnAcknowledgement;
+
+chan printShopItem, printTotal, printPaymentCard, printPaymentCash;
+
+chan getProductWithStockItem, returnProductWithStockItem, bookSale;
+
+chan readBarcode;
+
+chan startNewSale, completeItemRegistration, acknowledgeCashPayment, returnBoolean;
+
+chan readCardNumber, readPIN;
+</declaration>
+	<template>
+		<name x="5" y="5">CashDesk</name>
+		<declaration>// Place local declarations here.
+
+clock c;
+</declaration>
+		<location id="id0" x="-488" y="-224">
+			<urgent/>
+		</location>
+		<location id="id1" x="-608" y="-224">
+			<urgent/>
+		</location>
+		<location id="id2" x="-112" y="-304">
+			<urgent/>
+		</location>
+		<location id="id3" x="-608" y="-352">
+			<urgent/>
+		</location>
+		<location id="id4" x="-112" y="-392">
+			<urgent/>
+		</location>
+		<location id="id5" x="-344" y="-352">
+			<urgent/>
+		</location>
+		<location id="id6" x="-344" y="-408">
+			<urgent/>
+		</location>
+		<location id="id7" x="-344" y="-488">
+			<urgent/>
+		</location>
+		<location id="id8" x="-608" y="-488">
+		</location>
+		<location id="id9" x="-608" y="-640">
+			<urgent/>
+		</location>
+		<location id="id10" x="-112" y="-640">
+		</location>
+		<location id="id11" x="-112" y="-488">
+		</location>
+		<location id="id12" x="-112" y="-112">
+			<urgent/>
+		</location>
+		<location id="id13" x="80" y="-112">
+			<urgent/>
+		</location>
+		<location id="id14" x="80" y="-168">
+		</location>
+		<location id="id15" x="80" y="-224">
+			<urgent/>
+		</location>
+		<location id="id16" x="-112" y="-224">
+		</location>
+		<location id="id17" x="-344" y="-224">
+		</location>
+		<location id="id18" x="-344" y="-296">
+			<urgent/>
+		</location>
+		<init ref="id17"/>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id15"/>
+			<label kind="guard" x="-40" y="-192">c &gt;= 100</label>
+			<label kind="synchronisation" x="-72" y="-176">readBarcode?</label>
+			<nail x="16" y="-184"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-752" y="-304">displayPaymentCard!</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-576" y="-208">bookSale!</label>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-104" y="-448">printTotal!</label>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id17"/>
+			<label kind="synchronisation" x="-472" y="-272">printPaymentCash!</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-336" y="-392">displayPaymentCash!</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-336" y="-456">returnBoolean!</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="-320" y="-512">acknowledgeCashPayment?</label>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-680" y="-440">c &lt;= 2000</label>
+			<label kind="synchronisation" x="-776" y="-424">returnAcknowledgement?</label>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="-744" y="-584">requestTransaction!</label>
+			<label kind="assignment" x="-656" y="-568">c := 0</label>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="-376" y="-664">readPIN?</label>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id17"/>
+			<label kind="synchronisation" x="-480" y="-216">printPaymentCard!</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id10"/>
+			<label kind="synchronisation" x="-104" y="-584">readCardNumber?</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-104" y="-360">displayTotal!</label>
+		</transition>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-104" y="-288">completeItemRegistration?</label>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id16"/>
+			<label kind="synchronisation" x="-216" y="-168">printShopItem!</label>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="-64" y="-104">displayShopItem!</label>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id13"/>
+			<label kind="guard" x="96" y="-160">c &lt; 100</label>
+			<label kind="synchronisation" x="96" y="-144">returnProductWithStockItem?</label>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="96" y="-208">getProductWithStockItem!</label>
+			<label kind="assignment" x="96" y="-192">c := 0</label>
+		</transition>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id15"/>
+			<label kind="synchronisation" x="-64" y="-248">readBarcode?</label>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id16"/>
+			<label kind="synchronisation" x="-272" y="-224">startNewSale?</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="-568" y="-488">acknowledgeCashPayment?</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id18"/>
+			<label kind="synchronisation" x="-424" y="-328">bookSale!</label>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id10"/>
+			<label kind="guard" x="-432" y="-600">c &gt; 2000</label>
+			<label kind="synchronisation" x="-488" y="-584">readCardNumber?</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="-784" y="-632">readPIN?</label>
+			<nail x="-792" y="-352"/>
+			<nail x="-792" y="-640"/>
+		</transition>
+	</template>
+	<system>// List one or more processes to be composed into a system.
+system CashDesk;</system>
+</nta>

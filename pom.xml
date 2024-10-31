@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.muml.uppaal.xtext</groupId>
-	<artifactId>org.muml.uppaal.xtext.parent</artifactId>
+	<groupId>org.uppaal.xtext</groupId>
+	<artifactId>org.uppaal.xtext.parent</artifactId>
 	<version>${releaseVersion}${qualifier}</version>
 	<packaging>pom</packaging>
 
@@ -52,12 +52,12 @@
 	</properties>
 	
 	<modules>
-		<module>org.muml.uppaal.xtext</module>
-		<module>org.muml.uppaal.xtext.ide</module>
-		<module>org.muml.uppaal.xtext.ui</module>
-		<module>org.muml.uppaal.xtext.platform</module>
-		<module>org.muml.uppaal.xtext.tests</module>
-		<module>org.muml.uppaal.xtext.ui.tests</module>
+		<module>org.uppaal.xtext</module>
+		<module>org.uppaal.xtext.ide</module>
+		<module>org.uppaal.xtext.ui</module>
+		<module>org.uppaal.xtext.platform</module>
+		<module>org.uppaal.xtext.tests</module>
+		<module>org.uppaal.xtext.ui.tests</module>
 	</modules>
 
 	<build>
@@ -90,8 +90,8 @@
 					<configuration>
 						<target>
 							<artifact>
-								<groupId>org.muml.uppaal.xtext</groupId>
-								<artifactId>org.muml.uppaal.xtext.platform</artifactId>
+								<groupId>org.uppaal.xtext</groupId>
+								<artifactId>org.uppaal.xtext.platform</artifactId>
 								<version>${project.version}</version>
 							</artifact>
 						</target>

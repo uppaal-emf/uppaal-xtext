@@ -1,0 +1,1270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uppaal:NTA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:declarations="http://www.uppaal.org/declarations/1.0.0" xmlns:expressions="http://www.uppaal.org/expressions/1.0.0" xmlns:global="http://www.uppaal.org/declarations/global" xmlns:parsable="http://www.uppaal.org/parsable/1.0.0" xmlns:types="http://www.uppaal.org/types/1.0.0" xmlns:uppaal="http://www.uppaal.org/1.0.0" xsi:schemaLocation="http://www.uppaal.org/declarations/1.0.0 http://www.uppaal.org/1.0.0#//declarations http://www.uppaal.org/expressions/1.0.0 http://www.uppaal.org/1.0.0#//expressions http://www.uppaal.org/declarations/global http://www.uppaal.org/1.0.0#//declarations/global http://www.uppaal.org/types/1.0.0 http://www.uppaal.org/1.0.0#//types" name="Parsed_NTA">
+  <globalDeclarations>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="displayShopItem"/>
+      <variable xsi:type="declarations:Variable" name="displayTotal"/>
+      <variable xsi:type="declarations:Variable" name="displayPaymentCash"/>
+      <variable xsi:type="declarations:Variable" name="displayPaymentCard"/>
+    </declaration>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="displayShopItemExt"/>
+      <variable xsi:type="declarations:Variable" name="displayTotalExt"/>
+      <variable xsi:type="declarations:Variable" name="displayPaymentCashExt"/>
+      <variable xsi:type="declarations:Variable" name="returnDisplayStringExt"/>
+    </declaration>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="reset"/>
+    </declaration>
+    <declaration xsi:type="declarations:TypedDeclaration">
+      <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.3"/>
+      <variable xsi:type="declarations:Variable" name="fallback"/>
+    </declaration>
+    <channelPriority>
+      <groups>
+        <items xsi:type="global:ChannelItem">
+          <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+        </items>
+      </groups>
+      <groups>
+        <items xsi:type="global:DefaultItem"/>
+      </groups>
+    </channelPriority>
+  </globalDeclarations>
+  <template name="LightDisplay" init="#//@template.0/@location.9">
+    <declarations>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="c"/>
+      </declaration>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="urgentClock"/>
+      </declaration>
+    </declarations>
+    <location incomingEdges="#//@template.0/@edge.3 #//@template.0/@edge.8 #//@template.0/@edge.16" outgoingEdges="#//@template.0/@edge.0 #//@template.0/@edge.16">
+      <position x="-24" y="200"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.4 #//@template.0/@edge.10 #//@template.0/@edge.17" outgoingEdges="#//@template.0/@edge.1 #//@template.0/@edge.17">
+      <position x="312" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.5 #//@template.0/@edge.7 #//@template.0/@edge.18" outgoingEdges="#//@template.0/@edge.2 #//@template.0/@edge.18">
+      <position x="56" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.9 #//@template.0/@edge.19" outgoingEdges="#//@template.0/@edge.3 #//@template.0/@edge.8 #//@template.0/@edge.19">
+      <position x="184" y="200"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.13 #//@template.0/@edge.20" outgoingEdges="#//@template.0/@edge.9 #//@template.0/@edge.20">
+      <position x="184" y="128"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.11 #//@template.0/@edge.21" outgoingEdges="#//@template.0/@edge.4 #//@template.0/@edge.10 #//@template.0/@edge.21">
+      <position x="504" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.15 #//@template.0/@edge.22" outgoingEdges="#//@template.0/@edge.11 #//@template.0/@edge.22">
+      <position x="352" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.12 #//@template.0/@edge.23" outgoingEdges="#//@template.0/@edge.5 #//@template.0/@edge.7 #//@template.0/@edge.23">
+      <position x="-184" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.14 #//@template.0/@edge.24" outgoingEdges="#//@template.0/@edge.12 #//@template.0/@edge.24">
+      <position x="-8" y="56"/>
+    </location>
+    <location incomingEdges="#//@template.0/@edge.0 #//@template.0/@edge.1 #//@template.0/@edge.2 #//@template.0/@edge.6 #//@template.0/@edge.25" outgoingEdges="#//@template.0/@edge.6 #//@template.0/@edge.13 #//@template.0/@edge.14 #//@template.0/@edge.15 #//@template.0/@edge.25">
+      <position x="184" y="56"/>
+    </location>
+    <edge source="//@template.0/@location.0" target="//@template.0/@location.9">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.1" target="//@template.0/@location.9">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.2" target="//@template.0/@location.9">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.3" target="//@template.0/@location.0">
+      <bendPoint x="96" y="296"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="//@template.0/@location.5" target="//@template.0/@location.1">
+      <bendPoint x="504" y="-120"/>
+      <bendPoint x="320" y="-120"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="//@template.0/@location.7" target="//@template.0/@location.2">
+      <bendPoint x="-184" y="-128"/>
+      <bendPoint x="40" y="-128"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.9">
+      <bendPoint x="128" y="-88"/>
+      <bendPoint x="240" y="-88"/>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.7" target="//@template.0/@location.2">
+      <bendPoint x="32" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.3" target="//@template.0/@location.0">
+      <bendPoint x="88" y="200"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.4" target="//@template.0/@location.3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.5" target="//@template.0/@location.1">
+      <bendPoint x="336" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.6" target="//@template.0/@location.5">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.8" target="//@template.0/@location.7">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.4">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.8">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.6">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.0" target="//@template.0/@location.0">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.1" target="//@template.0/@location.1">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.2" target="//@template.0/@location.2">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.3" target="//@template.0/@location.3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.4" target="//@template.0/@location.4">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.5" target="//@template.0/@location.5">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.6" target="//@template.0/@location.6">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.7" target="//@template.0/@location.7">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.8" target="//@template.0/@location.8">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="//@template.0/@location.9" target="//@template.0/@location.9">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+  </template>
+  <template name="LightDisplayTest" init="#LightDisplayTest_10">
+    <declarations>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="c"/>
+      </declaration>
+      <declaration xsi:type="declarations:TypedDeclaration">
+        <typeDefinition xsi:type="expressions:IdentifierExpression" identifier="types:PredefinedType ../../../../../plugin/org.uppaal.model/model/stdlib.xmi#//@types.2"/>
+        <variable xsi:type="declarations:Variable" name="urgentClock"/>
+      </declaration>
+    </declarations>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.3 #//@template.1/@edge.8 #//@template.1/@edge.69 #//@template.1/@edge.70" outgoingEdges="#//@template.1/@edge.0 #//@template.1/@edge.16 #//@template.1/@edge.26 #//@template.1/@edge.33 #//@template.1/@edge.39 #//@template.1/@edge.45 #//@template.1/@edge.51 #//@template.1/@edge.57 #//@template.1/@edge.63 #//@template.1/@edge.69 #//@template.1/@edge.70" id="LightDisplayTest_1">
+      <position x="-24" y="200"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.4 #//@template.1/@edge.10 #//@template.1/@edge.71 #//@template.1/@edge.72" outgoingEdges="#//@template.1/@edge.1 #//@template.1/@edge.17 #//@template.1/@edge.27 #//@template.1/@edge.34 #//@template.1/@edge.40 #//@template.1/@edge.46 #//@template.1/@edge.52 #//@template.1/@edge.58 #//@template.1/@edge.64 #//@template.1/@edge.71 #//@template.1/@edge.72" id="LightDisplayTest_2">
+      <position x="312" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.5 #//@template.1/@edge.7 #//@template.1/@edge.73 #//@template.1/@edge.74" outgoingEdges="#//@template.1/@edge.2 #//@template.1/@edge.18 #//@template.1/@edge.28 #//@template.1/@edge.35 #//@template.1/@edge.41 #//@template.1/@edge.47 #//@template.1/@edge.53 #//@template.1/@edge.59 #//@template.1/@edge.65 #//@template.1/@edge.73 #//@template.1/@edge.74" id="LightDisplayTest_3">
+      <position x="56" y="-72"/>
+      <invariant xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </invariant>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.9" outgoingEdges="#//@template.1/@edge.3 #//@template.1/@edge.8 #//@template.1/@edge.76 #//@template.1/@edge.83" id="LightDisplayTest_4">
+      <position x="184" y="200"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.13 #//@template.1/@edge.22" outgoingEdges="#//@template.1/@edge.9 #//@template.1/@edge.19 #//@template.1/@edge.22 #//@template.1/@edge.29 #//@template.1/@edge.36 #//@template.1/@edge.42 #//@template.1/@edge.48 #//@template.1/@edge.60 #//@template.1/@edge.66 #//@template.1/@edge.77 #//@template.1/@edge.84" id="LightDisplayTest_5">
+      <position x="184" y="128"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.11" outgoingEdges="#//@template.1/@edge.4 #//@template.1/@edge.10 #//@template.1/@edge.78 #//@template.1/@edge.85" id="LightDisplayTest_6">
+      <position x="504" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.15 #//@template.1/@edge.23" outgoingEdges="#//@template.1/@edge.11 #//@template.1/@edge.20 #//@template.1/@edge.23 #//@template.1/@edge.30 #//@template.1/@edge.37 #//@template.1/@edge.43 #//@template.1/@edge.49 #//@template.1/@edge.54 #//@template.1/@edge.67 #//@template.1/@edge.79 #//@template.1/@edge.86" id="LightDisplayTest_7">
+      <position x="352" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.12" outgoingEdges="#//@template.1/@edge.5 #//@template.1/@edge.7 #//@template.1/@edge.75 #//@template.1/@edge.82" id="LightDisplayTest_8">
+      <position x="-184" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.14 #//@template.1/@edge.24" outgoingEdges="#//@template.1/@edge.12 #//@template.1/@edge.24 #//@template.1/@edge.31 #//@template.1/@edge.38 #//@template.1/@edge.44 #//@template.1/@edge.50 #//@template.1/@edge.55 #//@template.1/@edge.61 #//@template.1/@edge.68 #//@template.1/@edge.80 #//@template.1/@edge.87" id="LightDisplayTest_9">
+      <position x="-8" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.1/@edge.0 #//@template.1/@edge.1 #//@template.1/@edge.2 #//@template.1/@edge.6 #//@template.1/@edge.25" outgoingEdges="#//@template.1/@edge.6 #//@template.1/@edge.13 #//@template.1/@edge.14 #//@template.1/@edge.15 #//@template.1/@edge.21 #//@template.1/@edge.25 #//@template.1/@edge.32 #//@template.1/@edge.56 #//@template.1/@edge.62 #//@template.1/@edge.81 #//@template.1/@edge.88 #//@template.1/@edge.89 #//@template.1/@edge.90" id="LightDisplayTest_10">
+      <position x="184" y="56"/>
+    </location>
+    <location xsi:type="parsable:IdentifiableLocation" name="Err" colorCode="#ff0000" incomingEdges="#//@template.1/@edge.16 #//@template.1/@edge.17 #//@template.1/@edge.18 #//@template.1/@edge.19 #//@template.1/@edge.20 #//@template.1/@edge.21 #//@template.1/@edge.26 #//@template.1/@edge.27 #//@template.1/@edge.28 #//@template.1/@edge.29 #//@template.1/@edge.30 #//@template.1/@edge.31 #//@template.1/@edge.32 #//@template.1/@edge.33 #//@template.1/@edge.34 #//@template.1/@edge.35 #//@template.1/@edge.36 #//@template.1/@edge.37 #//@template.1/@edge.38 #//@template.1/@edge.39 #//@template.1/@edge.40 #//@template.1/@edge.41 #//@template.1/@edge.42 #//@template.1/@edge.43 #//@template.1/@edge.44 #//@template.1/@edge.45 #//@template.1/@edge.46 #//@template.1/@edge.47 #//@template.1/@edge.48 #//@template.1/@edge.49 #//@template.1/@edge.50 #//@template.1/@edge.51 #//@template.1/@edge.52 #//@template.1/@edge.53 #//@template.1/@edge.54 #//@template.1/@edge.55 #//@template.1/@edge.56 #//@template.1/@edge.57 #//@template.1/@edge.58 #//@template.1/@edge.59 #//@template.1/@edge.60 #//@template.1/@edge.61 #//@template.1/@edge.62 #//@template.1/@edge.63 #//@template.1/@edge.64 #//@template.1/@edge.65 #//@template.1/@edge.66 #//@template.1/@edge.67 #//@template.1/@edge.68 #//@template.1/@edge.75 #//@template.1/@edge.76 #//@template.1/@edge.77 #//@template.1/@edge.78 #//@template.1/@edge.79 #//@template.1/@edge.80 #//@template.1/@edge.101 #//@template.1/@edge.102 #//@template.1/@edge.103 #//@template.1/@edge.104 #//@template.1/@edge.105 #//@template.1/@edge.106 #//@template.1/@edge.107 #//@template.1/@edge.108 #//@template.1/@edge.109 #//@template.1/@edge.110" id="Err"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="N" colorCode="#00ff00" incomingEdges="#//@template.1/@edge.91 #//@template.1/@edge.92 #//@template.1/@edge.93 #//@template.1/@edge.94 #//@template.1/@edge.95 #//@template.1/@edge.96 #//@template.1/@edge.97 #//@template.1/@edge.98 #//@template.1/@edge.99 #//@template.1/@edge.100" id="N"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.81" outgoingEdges="#//@template.1/@edge.91 #//@template.1/@edge.101" id="LightDisplay_R"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R0" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.82" outgoingEdges="#//@template.1/@edge.92 #//@template.1/@edge.102" id="LightDisplay_R0"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R1" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.83" outgoingEdges="#//@template.1/@edge.93 #//@template.1/@edge.103" id="LightDisplay_R1"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R2" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.84" outgoingEdges="#//@template.1/@edge.94 #//@template.1/@edge.104" id="LightDisplay_R2"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R3" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.85" outgoingEdges="#//@template.1/@edge.95 #//@template.1/@edge.105" id="LightDisplay_R3"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R4" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.86" outgoingEdges="#//@template.1/@edge.96 #//@template.1/@edge.106" id="LightDisplay_R4"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R5" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.87" outgoingEdges="#//@template.1/@edge.97 #//@template.1/@edge.107" id="LightDisplay_R5"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R6" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.88" outgoingEdges="#//@template.1/@edge.98 #//@template.1/@edge.108" id="LightDisplay_R6"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R7" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.89" outgoingEdges="#//@template.1/@edge.99 #//@template.1/@edge.109" id="LightDisplay_R7"/>
+    <location xsi:type="parsable:IdentifiableLocation" name="R8" locationTimeKind="COMMITED" incomingEdges="#//@template.1/@edge.90" outgoingEdges="#//@template.1/@edge.100 #//@template.1/@edge.110" id="LightDisplay_R8"/>
+    <edge source="LightDisplayTest_1" target="LightDisplayTest_10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="LightDisplayTest_10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="LightDisplayTest_10">
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_4" target="LightDisplayTest_1">
+      <bendPoint x="96" y="296"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_6" target="LightDisplayTest_2">
+      <bendPoint x="504" y="-120"/>
+      <bendPoint x="320" y="-120"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_8" target="LightDisplayTest_3">
+      <bendPoint x="-184" y="-128"/>
+      <bendPoint x="40" y="-128"/>
+      <guard xsi:type="expressions:CompareExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_10" target="LightDisplayTest_10">
+      <bendPoint x="128" y="-88"/>
+      <bendPoint x="240" y="-88"/>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_8" target="LightDisplayTest_3">
+      <bendPoint x="32" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_4" target="LightDisplayTest_1">
+      <bendPoint x="88" y="200"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="LightDisplayTest_4">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_6" target="LightDisplayTest_2">
+      <bendPoint x="336" y="-56"/>
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="LightDisplayTest_6">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="LightDisplayTest_8">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="LightDisplayTest_5">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="LightDisplayTest_9">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="LightDisplayTest_7">
+      <update xsi:type="expressions:AssignmentExpression">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </update>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="LightDisplayTest_5">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="LightDisplayTest_7">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="LightDisplayTest_9">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="LightDisplayTest_10">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="Err">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="LightDisplayTest_1">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_1" target="LightDisplayTest_1">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="LightDisplayTest_2">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_2" target="LightDisplayTest_2">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="LightDisplayTest_3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_3" target="LightDisplayTest_3">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="6"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.2/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_8" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_4" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_5" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_6" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_7" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_9" target="Err">
+      <guard xsi:type="expressions:CompareExpression" operator=">">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplayTest_10" target="LightDisplay_R"/>
+    <edge source="LightDisplayTest_8" target="LightDisplay_R0">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_4" target="LightDisplay_R1">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_5" target="LightDisplay_R2">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_6" target="LightDisplay_R3">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.0/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="5"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_7" target="LightDisplay_R4">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_9" target="LightDisplay_R5">
+      <guard xsi:type="expressions:CompareExpression" operator="&lt;=">
+        <firstExpr xsi:type="expressions:IdentifierExpression" identifier="#//@template.0/@declarations/@declaration.1/@elements.0"/>
+        <secondExpr xsi:type="expressions:LiteralExpression" text="0"/>
+      </guard>
+    </edge>
+    <edge source="LightDisplayTest_10" target="LightDisplay_R6"/>
+    <edge source="LightDisplayTest_10" target="LightDisplay_R7"/>
+    <edge source="LightDisplayTest_10" target="LightDisplay_R8"/>
+    <edge source="LightDisplay_R" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R0" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R1" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R2" target="N">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R3" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.3"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R4" target="N">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R5" target="N">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.1/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R6" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.1"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R7" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.2"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R8" target="N">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.0/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R0" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R1" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R2" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R3" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R4" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R5" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R6" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R7" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+    <edge source="LightDisplay_R8" target="Err">
+      <synchronization>
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+  </template>
+  <template name="Fallback" init="#fb">
+    <location xsi:type="parsable:IdentifiableLocation" incomingEdges="#//@template.2/@edge.0" outgoingEdges="#//@template.2/@edge.0" id="fb"/>
+    <edge source="fb" target="fb">
+      <synchronization kind="!">
+        <channelExpression identifier="#//@globalDeclarations/@declaration.3/@elements.0"/>
+      </synchronization>
+    </edge>
+  </template>
+  <template name="Perturbator" init="#pert">
+    <location xsi:type="parsable:IdentifiableLocation" id="pert"/>
+  </template>
+  <systemDeclarations>
+    <system>
+      <instantiationList template="#//@template.0 #//@template.1 #//@template.2 #//@template.3"/>
+    </system>
+  </systemDeclarations>
+</uppaal:NTA>
