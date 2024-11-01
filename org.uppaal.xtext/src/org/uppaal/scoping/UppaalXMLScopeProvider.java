@@ -172,7 +172,7 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 	/**
 	 * Method to find the scope corresponding to a given ChannelPrefixExpression.
 	 * Such an expression is restricted to the built-in 'chan' type, however that
-	 * type could have been be redefined using a 'typedef' declaration. To support
+	 * type could have been redefined using a 'typedef' declaration. To support
 	 * redefined channel types as well, this method returns a recursive scope of
 	 * arbitrary types.
 	 *
