@@ -3,6 +3,11 @@
  */
 package org.uppaal.scoping;
 
+import static com.google.common.collect.Iterables.concat;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.size;
+import static org.eclipse.xtext.scoping.Scopes.scopeFor;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.uppaal.NTA;
 import org.uppaal.core.IdentifiableElement;
 import org.uppaal.core.NamedElement;
@@ -23,6 +30,7 @@ import org.uppaal.declarations.TypeDeclaration;
 import org.uppaal.declarations.TypedDeclaration;
 import org.uppaal.declarations.TypedElementContainer;
 import org.uppaal.declarations.Variable;
+import org.uppaal.expressions.ChannelPrefixExpression;
 import org.uppaal.expressions.DataPrefixExpression;
 import org.uppaal.expressions.Expression;
 import org.uppaal.expressions.ExpressionsPackage;
@@ -38,12 +46,6 @@ import org.uppaal.templates.TemplatesPackage;
 import org.uppaal.types.DeclaredType;
 import org.uppaal.types.StdLib;
 import org.uppaal.types.StructTypeSpecification;
-import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.uppaal.scoping.AbstractUppaalXMLScopeProvider;
-
-import static org.eclipse.xtext.scoping.Scopes.*;
-import static com.google.common.collect.Iterables.*;
 
 /**
  * This class contains custom scoping description.
@@ -109,6 +111,11 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
         	return getIdentifierScope(expression);
     	}
     	
+    	if (reference == ExpressionsPackage.Literals.CHANNEL_PREFIX_EXPRESSION__CHANNEL_TYPE) {
+			final ChannelPrefixExpression expression = (ChannelPrefixExpression) context;
+			return getChannelPrefixScope(expression);
+		}
+    	
         return super.getScope(context,reference);
     }
     
@@ -117,17 +124,17 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 	 * It checks for certain special cases an then delegates to more specialized
 	 * methods.
 	 * 
-	 * @param identifier The IdentifierExpression that needs resolving.
+	 * @param identifierExpression The IdentifierExpression that needs resolving.
 	 * 
 	 * @return Scope for the IdentifierExpression.
 	 */
-	private IScope getIdentifierScope(IdentifierExpression identifier) {
+	private IScope getIdentifierScope(IdentifierExpression identifierExpression) {
 		// Filter out cases where we may only reference instances of Type.
 		
 		final UppaalScopingSwitch<IScope> scopingSwitch = new UppaalScopingSwitch<>() {
 			@Override
 			public IScope handleCase(TypeDeclaration declaration) {
-				if (identifier.eContainingFeature() == DeclarationsPackage.Literals.TYPE_DECLARATION__TYPE_DEFINITION) {
+				if (identifierExpression.eContainingFeature() == DeclarationsPackage.Literals.TYPE_DECLARATION__TYPE_DEFINITION) {
 					return scopeTypes();
 				}
 				
@@ -136,7 +143,7 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			
 			@Override
 			public IScope handleCase(TypedElementContainer container) {
-				if (identifier.eContainingFeature() == DeclarationsPackage.Literals.TYPED_ELEMENT_CONTAINER__TYPE_DEFINITION) {
+				if (identifierExpression.eContainingFeature() == DeclarationsPackage.Literals.TYPED_ELEMENT_CONTAINER__TYPE_DEFINITION) {
 					return scopeTypes();
 				}
 				
@@ -149,19 +156,35 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			}
 			
 			private IScope scopeTypes() {
-				return getRecursiveScope(identifier, ScopeMode.TYPES);
+				return getRecursiveTypesScope(identifierExpression);
 			}
 			
 			@Override
 			public IScope defaultCase(EObject object) {
-				return getRecursiveScope(identifier, ScopeMode.TYPED_ELEMENTS);
+				return getRecursiveScope(identifierExpression, ScopeMode.TYPED_ELEMENTS);
 			}
 			
 		};
 		
-		return scopingSwitch.doSwitch(identifier.eContainer());
+		return scopingSwitch.doSwitch(identifierExpression.eContainer());
 	}
 	
+	/**
+	 * Method to find the scope corresponding to a given ChannelPrefixExpression.
+	 * Such an expression is restricted to the built-in 'chan' type, however that
+	 * type could have been redefined using a 'typedef' declaration. To support
+	 * redefined channel types as well, this method returns a recursive scope of
+	 * arbitrary types.
+	 *
+	 * @param channelPrefixExpression The ChannelPrefixExpression that needs
+	 *                                resolving.
+	 *
+	 * @return Scope for the ChannelPrefixExpression.
+	 */
+	private IScope getChannelPrefixScope(ChannelPrefixExpression channelPrefixExpression) {
+		return getRecursiveTypesScope(channelPrefixExpression);
+	}
+		
 	/**
 	 * Checks whether the given ScopedIdentifierExpression follows the structure that
 	 * we can scope, i.e. if the "scope" is either an IdentifierExpression or a valid
@@ -409,6 +432,10 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 		
 		// In case of failure or end of recursion, return the empty scope.
 		return IScope.NULLSCOPE;
+	}
+	
+	private IScope getRecursiveTypesScope(EObject object) {
+		return getRecursiveScope(object, ScopeMode.TYPES);
 	}
 
 }
