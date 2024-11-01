@@ -261,10 +261,7 @@ ChannelPrefixExpression returns expressions::ChannelPrefixExpression:
 	(broadcast=ChannelPrefixExpression_Broadcast)?) |
 	(broadcast=ChannelPrefixExpression_Broadcast
 	(urgent=ChannelPrefixExpression_Urgent)?))
-	channelType=[types::Type|CHAN_KEYWORD];
-
-CHAN_KEYWORD:
-	'chan';
+	channelType=[types::Type|UPPAAL_TYPE_OR_IDENTIFIER];
 
 ChannelPrefixExpression_Urgent returns ecore::EBoolean:
 	'urgent';
