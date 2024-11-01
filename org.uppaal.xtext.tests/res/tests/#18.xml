@@ -30,5 +30,11 @@ broadcast urgent redefinedChan rc5;
 Process = Template();
 // List one or more processes to be composed into a system.
 system Process;
-</system>
+    </system>
+	<queries>
+		<query>
+			<formula></formula>
+			<comment></comment>
+		</query>
+	</queries>
 </nta>
