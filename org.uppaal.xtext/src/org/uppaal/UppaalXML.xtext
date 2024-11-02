@@ -107,7 +107,7 @@ enum LocationKind returns templates::LocationKind:
 
 Edge returns templates::Edge hidden(WS):
 // Again skip the coordinates.
-	'<transition' (('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' colorCode=STRING)?) '>'
+	'<transition' (('x' '=' STRING)? & ('y' '=' STRING)? & ('id' '=' id=STRING)? & ('color' '=' colorCode=STRING)?) '>'
 	// Source...
 	'<source' 'ref' '=' source=[templates::Location|STRING] '/>'
 	// Target...
