@@ -107,7 +107,7 @@ enum LocationKind returns templates::LocationKind:
 
 Edge returns templates::Edge hidden(WS):
 // Again skip the coordinates.
-	'<transition' (('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' colorCode=STRING)?) '>'
+	'<transition' (('x' '=' STRING)? & ('y' '=' STRING)? & ('id' '=' id=STRING)? & ('color' '=' colorCode=STRING)?) '>'
 	// Source...
 	'<source' 'ref' '=' source=[templates::Location|STRING] '/>'
 	// Target...
@@ -576,18 +576,12 @@ NegationExpression_Alternative returns expressions::Expression:
 
 // Increment/Decrement Expression (++,--, pre and post)
 // (unary, right-recursive)
-// "Hack": Two enums need to be set by one token, e.g. Operator.INCREMENT
-// and Position.PRE for ++variable. This is not that easy, so the ++ was
-// split up so each enum consumes one +. This leads to the need of splitting
-// up all possible cases into separate rules.
 IncrementDecrementExpression returns expressions::Expression:
 	PreIncrementDecrementExpression;
 
 PreIncrementDecrementExpression returns expressions::Expression:
-	PostIncrementDecrementExpression | ({expressions::IncrementDecrementExpression}
-	((//		position=PreIncrementPosition
-	operator=IncrementOperator) | (//		position=PreDecrementPosition
-	operator=DecrementOperator))
+	PostIncrementDecrementExpression | ({expressions::PreIncrementDecrementExpression}
+	(operator=IncrementDecrementOperator)
 	expression=PreIncrementDecrementExpression);
 
 PostIncrementDecrementExpression returns expressions::Expression:
@@ -596,28 +590,11 @@ PostIncrementDecrementExpression returns expressions::Expression:
 	// (a++)+b and a+(++b)
 	// As UPPAAL uses the former way a syntactic predicate ensures the
 	// higher precedence of the post-expression.
-	=>({expressions::IncrementDecrementExpression.expression=current}
-	((//			position=PostIncrementPosition
-	operator=IncrementOperator) | (//			position=PostDecrementPosition
-	operator=DecrementOperator)))*;
+	=>({expressions::PostIncrementDecrementExpression.expression=current}
+	operator=IncrementDecrementOperator)*;
 
-//enum PreIncrementPosition returns expressions::IncrementDecrementPosition:
-//	PRE='+'
-//;
-//enum PreDecrementPosition returns expressions::IncrementDecrementPosition:
-//	PRE='-'
-//;
-//enum PostIncrementPosition returns expressions::IncrementDecrementPosition:
-//	POST='+'
-//;
-//enum PostDecrementPosition returns expressions::IncrementDecrementPosition:
-//	POST='-'
-//;
-enum IncrementOperator returns expressions::IncrementDecrementOperator:
-	INCREMENT='+';
-
-enum DecrementOperator returns expressions::IncrementDecrementOperator:
-	DECREMENT='-';
+enum IncrementDecrementOperator returns expressions::IncrementDecrementOperator:
+	INCREMENT='++' | DECREMENT='--';
 
 // ScopedIdentifier Expression (identifiers with .)
 ScopedIdentifierExpression returns expressions::Expression:
