@@ -639,11 +639,11 @@ SimpleIdentifierExpression returns expressions::IdentifierExpression:
 UppaalQuery returns queries::QueryDescription hidden(WS):
 	{queries::QueryDescription}
 	'<query' '>'
-	'<formula' '>'
+	('<formula' '>'
 	formula=AnyQuery? // TODO: make identifiers resolvable
-	'</' 'formula' '>'
+	'</' 'formula' '>' | '<formula' '/>')
 //		'<comment>' // see below
-	comment=QUERY_COMMENT
+	comment=(QUERY_COMMENT | EMPTY_QUERY_COMMENT)
 //		'</' 'comment' '>'
 	'</' 'query' '>';
 
@@ -654,7 +654,11 @@ UppaalQuery returns queries::QueryDescription hidden(WS):
 // Ideally, tokens could be generated depending on context as well, but this doesn't seem to be the case
 // This is, what forces ID to be a non-terminal rule as well...
 terminal QUERY_COMMENT:
-	'<comment>'->'</comment>';
+	'<comment' '>'->'</' 'comment' '>';
+	
+terminal EMPTY_QUERY_COMMENT:
+	'<comment' '/>'
+;
 
 //---------------------------------------------------------------------------------------------------------------------------------
 // PROPERTIES / REQUIREMENTS
