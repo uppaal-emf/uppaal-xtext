@@ -27,13 +27,7 @@ NTA returns uppaal::NTA hidden(WS):
 		'<?xml version="1.0" encoding="utf-8"?>' |
 		"<?xml version='1.0' encoding='utf-8'?>"
 	)
-    (
-        // Accept both versions at the same time for the moment.
-        // As long, as no tag-semantics change ,this should be fine.
-        // This, however, assumes that a document of version flat-1_1 doesn't ever have any nodes which belong to the newer version
-        "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>" |
-        "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>"
-    )
+    DTD // Parse the document type definition.
 	'<nta' '>'
 
 	// Imports are not used by UPPAAL currently (at least in 2004).
@@ -58,6 +52,11 @@ NTA returns uppaal::NTA hidden(WS):
 
 	'</' 'nta' '>'
 ;
+
+// Accept different versions at the same time for the moment.
+// As long as no tag semantics change, this should be fine.
+// This, however, assumes that a document of a specific version doesn't ever have any nodes which belong to the newer version.
+terminal DTD: "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System " INT '.' INT "//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-" INT '_' INT ".dtd'>";
 
 Template returns templates::Template hidden(WS):
 // The name of the template might have x- and y-coordinates for some reason, they must be skipped.
