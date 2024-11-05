@@ -23,6 +23,7 @@ import org.uppaal.NTA;
 import org.uppaal.core.IdentifiableElement;
 import org.uppaal.core.NamedElement;
 import org.uppaal.core.TypedElement;
+import org.uppaal.declarations.Declarations;
 import org.uppaal.declarations.DeclarationsPackage;
 import org.uppaal.declarations.Function;
 import org.uppaal.declarations.SystemDeclarations;
@@ -30,6 +31,7 @@ import org.uppaal.declarations.TypeDeclaration;
 import org.uppaal.declarations.TypedDeclaration;
 import org.uppaal.declarations.TypedElementContainer;
 import org.uppaal.declarations.Variable;
+import org.uppaal.declarations.system.InstantiationList;
 import org.uppaal.expressions.ChannelPrefixExpression;
 import org.uppaal.expressions.DataPrefixExpression;
 import org.uppaal.expressions.Expression;
@@ -38,9 +40,12 @@ import org.uppaal.expressions.FunctionCallExpression;
 import org.uppaal.expressions.IdentifierExpression;
 import org.uppaal.expressions.QuantificationExpression;
 import org.uppaal.expressions.ScopedIdentifierExpression;
+import org.uppaal.queries.QueryDescription;
 import org.uppaal.statements.Block;
 import org.uppaal.statements.Iteration;
+import org.uppaal.templates.AbstractTemplate;
 import org.uppaal.templates.Edge;
+import org.uppaal.templates.RedefinedTemplate;
 import org.uppaal.templates.Template;
 import org.uppaal.templates.TemplatesPackage;
 import org.uppaal.types.DeclaredType;
@@ -55,7 +60,7 @@ import org.uppaal.types.StructTypeSpecification;
  */
 public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 	private enum ScopeMode {
-		TYPES, TYPED_ELEMENTS, TYPES_AND_TYPED_ELEMENTS
+		TYPES, TYPED_ELEMENTS_AND_LOCATIONS, TYPES_AND_TYPED_ELEMENTS
 	}
 	
 	private static com.google.common.base.Function<IdentifiableElement, QualifiedName> getIdentifyableName =
@@ -67,12 +72,20 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 	 */
 	private static Function2<Iterable<NamedElement>, TypedElementContainer, Iterable<NamedElement>> TypedElementContainerReduction =
 			(a, b) -> concat(a, filter(b.getElements(), NamedElement.class));
+	
 	/**
 	 * Helper method that appends the Types of a TypeDeclaration to a given
 	 * Iterable for NamedElements.
 	 */
 	private static Function2<Iterable<NamedElement>, TypeDeclaration, Iterable<NamedElement>> TypeDeclarationReduction =
 			(a, b) -> concat(a, filter(b.getType(), NamedElement.class));
+	
+	/**
+	 * Helper method that appends the Templates of an InstantiationList to a given
+	 * Iterable for NamedElements.
+	 */
+	private static Function2<Iterable<NamedElement>, InstantiationList, Iterable<NamedElement>> InstantiationListReduction =
+			(a, b) -> concat(a, b.getTemplate());
 
 	private static <T,V,B extends T> T reduce(Iterable<V> iterable, B base, Function2<? super T, ? super V, ? extends T> function) {
 		T value = base;
@@ -161,7 +174,7 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			
 			@Override
 			public IScope defaultCase(EObject object) {
-				return getRecursiveScope(identifierExpression, ScopeMode.TYPED_ELEMENTS);
+				return getRecursiveScope(identifierExpression, ScopeMode.TYPED_ELEMENTS_AND_LOCATIONS);
 			}
 			
 		};
@@ -236,31 +249,52 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 		// Define variables.
 		StructTypeSpecification struct = null;
 		IScope scope = IScope.NULLSCOPE;
-		IdentifierExpression identifier = null;
+		IdentifierExpression identifierExpression = null;
 
 		// Check on which level of the ScopedIdentifierExpression we currently are
 		// and get the relevant scope identifier.
-		final Expression expressionScope = expr.getScope();
+		final Expression scopeExpression = expr.getScope();
 		
-		if (expressionScope instanceof IdentifierExpression) {
-			identifier = (IdentifierExpression) expressionScope;
+		if (scopeExpression instanceof IdentifierExpression) {
+			identifierExpression = (IdentifierExpression) scopeExpression;
 		}
 		
-		if (expressionScope instanceof ScopedIdentifierExpression) {
-			identifier = ((ScopedIdentifierExpression) expressionScope).getIdentifier();
+		if (scopeExpression instanceof ScopedIdentifierExpression) {
+			identifierExpression = ((ScopedIdentifierExpression) scopeExpression).getIdentifier();
 		}
 		
-		if (expressionScope instanceof FunctionCallExpression) {
-			final FunctionCallExpression functioncall = (FunctionCallExpression) expressionScope;
-			return getFunctionCallScopeForTemplate((Template) functioncall.getFunction());
+		if (scopeExpression instanceof FunctionCallExpression) {
+			final FunctionCallExpression functioncall = (FunctionCallExpression) scopeExpression;
+			return getFunctionCallScopeForTemplate((Template) functioncall.getFunction()); //XXX Function casted to Template?
 		}
 		
-		// Try to find a struct through the given identifier, i.e. the identifier
-		// should point to a variable of a struct type.
-		final NamedElement identifierElement= identifier.getIdentifier();
+		final NamedElement identifier = identifierExpression.getIdentifier();
 		
-		if (identifierElement instanceof TypedElement) {
-			Expression typeDefinition = ((TypedElement) identifierElement).getTypeDefinition();
+		if (identifier instanceof AbstractTemplate) {
+			AbstractTemplate abstractTemplate = (AbstractTemplate) identifier ;
+						
+			while (abstractTemplate instanceof RedefinedTemplate) {
+				abstractTemplate = ((RedefinedTemplate) abstractTemplate).getReferredTemplate();
+			};
+			
+			if (abstractTemplate instanceof Template) {
+				Template template = (Template) abstractTemplate;
+				
+				Iterable<TypedDeclaration> localTypedDeclarations = filter(
+						template.getDeclarations().getDeclaration(),
+						TypedDeclaration.class);
+				
+				Iterable<NamedElement> locallyDeclaredElements = reduce(localTypedDeclarations, TypedElementContainerReduction);				
+				IScope locationsScope = scopeFor(template.getLocation());
+				scope = scopeFor(locallyDeclaredElements, locationsScope);
+			}
+		}
+		
+		if (identifier instanceof TypedElement) {
+			// Try to find a struct through the given identifier, i.e. the identifier
+			// should point to a variable of a struct type.
+			
+			Expression typeDefinition = ((TypedElement) identifier ).getTypeDefinition();
 			
 			// Check if we have some typedefs we need to trace first.
 			while ((typeDefinition instanceof IdentifierExpression)
@@ -285,10 +319,8 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 		return scope;
 	}
 
-
-
     private IScope getFunctionCallScopeForTemplate(Template template) {
-    	return scopeFor(template.getLocation(), getRecursiveScope(template, ScopeMode.TYPED_ELEMENTS));
+    	return scopeFor(template.getLocation(), getRecursiveScope(template, ScopeMode.TYPED_ELEMENTS_AND_LOCATIONS));
 	}
 
 	/**
@@ -309,7 +341,7 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 		EObject lastObj = object;
 		ScopeMode curMode = mode;
 		
-		final UppaalScopingSwitch<Iterable<NamedElement>> typedElementSwitch = new UppaalScopingSwitch<>() {
+		final UppaalScopingSwitch<Iterable<NamedElement>> typedElementAndLocationSwitch = new UppaalScopingSwitch<>() {
 			@Override
 			public Iterable<NamedElement> handleCase(NTA nta) {
 				Iterable<TypedDeclaration> declarations = filter(
@@ -322,7 +354,11 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			@Override
 			public Iterable<NamedElement> handleCase(Template template) {
 				Iterable<NamedElement> parameterNames = reduce(template.getParameter(), TypedElementContainerReduction);
-				Iterable<NamedElement> declarationNames = reduce(filter(template.getDeclarations().getDeclaration(),TypedDeclaration.class), TypedElementContainerReduction);
+				
+				Declarations localDeclarations = template.getDeclarations();
+				Iterable<NamedElement> declarationNames = (localDeclarations == null) 
+						? Collections.emptyList()
+						: reduce(filter(localDeclarations.getDeclaration(), TypedDeclaration.class), TypedElementContainerReduction);
 				
 				return concat(parameterNames, declarationNames);
 			}
@@ -340,6 +376,22 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 			@Override
 			public Iterable<NamedElement> handleCase(Iteration iteration) {
 				return filter(iteration.getElements(), NamedElement.class);
+			}
+			
+			@Override
+			public Iterable<NamedElement> handleCase(QueryDescription queryDescription) {
+				EObject container = queryDescription.eContainer();
+				
+				if (container instanceof NTA) {
+					SystemDeclarations systemDeclarations = ((NTA) container).getSystemDeclarations();
+					
+					Iterable<NamedElement> declarationNames = handleCase(systemDeclarations);
+					Iterable<NamedElement> instantiationNames = reduce(systemDeclarations.getSystem().getInstantiationList(), InstantiationListReduction);
+					
+					return concat(instantiationNames, declarationNames);
+				}
+				
+				return super.handleCase(queryDescription);
 			}
 			
 			@Override
@@ -411,9 +463,9 @@ public class UppaalXMLScopeProvider extends AbstractUppaalXMLScopeProvider {
 				}
 			}
 				
-			// Scope for TypedElement's.
-			if(curMode == ScopeMode.TYPED_ELEMENTS || curMode == ScopeMode.TYPES_AND_TYPED_ELEMENTS) {
-				elements = concat(elements, typedElementSwitch.doSwitch(curObj));
+			// Scope for TypedElemens and Locations.
+			if(curMode == ScopeMode.TYPED_ELEMENTS_AND_LOCATIONS || curMode == ScopeMode.TYPES_AND_TYPED_ELEMENTS) {
+				elements = concat(elements, typedElementAndLocationSwitch.doSwitch(curObj));
 			}
 					
 			// Scope for DeclaredType and Type.
