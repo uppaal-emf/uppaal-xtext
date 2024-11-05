@@ -32,37 +32,37 @@ NTA returns uppaal::NTA hidden(WS):
 
 	// Imports are not used by UPPAAL currently (at least in 2004).
 	// Source: https://groups.yahoo.com/neo/groups/uppaal/conversations/messages/546
-	('<imports' '>' ANY_TOKEN_BUT_XML_CLOSE* '</' 'imports' '>')*
+	('<imports' '>' ANY_TOKEN_BUT_XML_CLOSE* '</imports' '>')*
 
 	// Parse the global declarations.
-	('<declaration' '>' globalDeclarations=GlobalDeclarations '</' 'declaration' '>')?
+	('<declaration' '>' globalDeclarations=GlobalDeclarations '</declaration' '>')?
 
 	// Parse all the templates.
-	('<template' '>' template+=Template '</' 'template' '>')+
+	('<template' '>' template+=Template '</template' '>')+
 
 	// Instantiation is not used by UPPAAL anymore.
 	// TODO Support it either way for old files.
-	('<instantiation' '>' ANY_TOKEN_BUT_XML_CLOSE* '</' 'instantiation' '>')?
+	('<instantiation' '>' ANY_TOKEN_BUT_XML_CLOSE* '</instantiation' '>')?
 
 	// Parse the system declarations.
-	'<system' '>' systemDeclarations=SystemDeclarations '</' 'system' '>'
+	'<system' '>' systemDeclarations=SystemDeclarations '</system' '>'
 
 	// Parse the query declarations.
-	('<queries' '>' (queries+=UppaalQuery)* '</' 'queries' '>')?
+	('<queries' '>' (queries+=UppaalQuery)* '</queries' '>')?
 
-	'</' 'nta' '>'
+	'</nta' '>'
 ;
 		
 Template returns templates::Template hidden(WS):
 // The name of the template might have x- and y-coordinates for some reason, they must be skipped.
-	'<name' (('x' '=' STRING)? & ('y' '=' STRING)?) '>' name=ID '</' 'name' '>'
+	'<name' (('x' '=' STRING)? & ('y' '=' STRING)?) '>' name=ID '</name' '>'
 	// Template parameters.
 	('<parameter' '>'
 	(parameter+=ParameterContainer
 	(',' parameter+=ParameterContainer)*)?
-	'</' 'parameter' '>')?
+	'</parameter' '>')?
 	// Local declarations.
-	('<declaration' '>' declarations=LocalDeclarations '</' 'declaration' '>')?
+	('<declaration' '>' declarations=LocalDeclarations '</declaration' '>')?
 	// Get all the locations.
 	(location+=Location)+
 	// Reference the initial location.
@@ -80,21 +80,21 @@ Location returns templates::Location hidden(WS):
 	// Get the name of the location.
 	('<name'
 	// Discard name location as there is no field for this.
-	(('x' '=' STRING)? & ('y' '=' STRING)?) '>' name=ID '</' 'name' '>')?
+	(('x' '=' STRING)? & ('y' '=' STRING)?) '>' name=ID '</name' '>')?
 	// Parse the labels.
 	(('<label' 'kind' '=' '"comments"'
 	(('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' STRING)?)
 	'>'
 	comment=CommentLabel
-	'</' 'label' '>')? &
+	'</label' '>')? &
 	('<label' 'kind' '=' '"invariant"'
 	(('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' STRING)?)
 	'>'
 	invariant=Expression
-	'</' 'label' '>')?)
+	'</label' '>')?)
 	// Check whether it is an urgent or committed location.
 	locationTimeKind=LocationKind?
-	'</' 'location' '>'));
+	'</location' '>'));
 
 enum LocationKind returns templates::LocationKind:
 	URGENT='<urgent/>' | COMMITED='<committed/>';
@@ -111,31 +111,31 @@ Edge returns templates::Edge hidden(WS):
 	(('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' STRING)?)
 	'>'
 	comment=CommentLabel
-	'</' 'label' '>')? &
+	'</label' '>')? &
 	('<label' 'kind' '=' '"synchronisation"'
 	(('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' STRING)?)
 	'>'
 	synchronization=SynchronizationLabel
-	'</' 'label' '>')? &
+	'</label' '>')? &
 	('<label' 'kind' '=' '"guard"'
 	(('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' STRING)?)
 	'>'
 	guard=Expression
-	'</' 'label' '>')? &
+	'</label' '>')? &
 	('<label' 'kind' '=' '"assignment"'
 	(('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' STRING)?)
 	'>'
 	update+=Expression (',' update+=Expression)*
-	'</' 'label' '>')? &
+	'</label' '>')? &
 	('<label' 'kind' '=' '"select"'
 	(('x' '=' STRING)? & ('y' '=' STRING)? & ('color' '=' STRING)?)
 	'>'
 	selection+=Selection (',' selection+=Selection)*
-	'</' 'label' '>')?)
+	'</label' '>')?)
 	// Get the nails/bendPoints.
 	('<nail' bendPoint+=Point '/>')*
 	// Close the tag.
-	'</' 'transition' '>';
+	'</transition' '>';
 
 CommentLabel returns ecore::EString hidden(WS):
 	ANY_TOKEN_BUT_XML_CLOSE*;
@@ -636,11 +636,11 @@ UppaalQuery returns queries::QueryDescription hidden(WS):
 	'<query' '>'
 	('<formula' '>'
 	formula=AnyQuery? // TODO: make identifiers resolvable
-	'</' 'formula' '>' | '<formula' '/>')
+	'</formula' '>' | '<formula' '/>')
 //		'<comment>' // see below
 	comment=(QUERY_COMMENT | EMPTY_QUERY_COMMENT)
-//		'</' 'comment' '>'
-	'</' 'query' '>';
+//		'</comment' '>'
+	'</query' '>';
 
 // The comments in the query section are not recognized as comment-section during tokenisation
 // This means, that a string-token is generated when a ' or " is present.
@@ -649,7 +649,7 @@ UppaalQuery returns queries::QueryDescription hidden(WS):
 // Ideally, tokens could be generated depending on context as well, but this doesn't seem to be the case
 // This is, what forces ID to be a non-terminal rule as well...
 terminal QUERY_COMMENT:
-	'<comment' '>'->'</' 'comment' '>';
+	'<comment' '>'->'</comment' '>';
 	
 terminal EMPTY_QUERY_COMMENT:
 	'<comment' '/>'
