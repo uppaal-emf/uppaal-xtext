@@ -52,12 +52,7 @@ NTA returns uppaal::NTA hidden(WS):
 
 	'</' 'nta' '>'
 ;
-
-// Accept different versions at the same time for the moment.
-// As long as no tag semantics change, this should be fine.
-// This, however, assumes that a document of a specific version doesn't ever have any nodes which belong to the newer version.
-terminal DTD: "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System " INT '.' INT "//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-" INT '_' INT ".dtd'>";
-
+		
 Template returns templates::Template hidden(WS):
 // The name of the template might have x- and y-coordinates for some reason, they must be skipped.
 	'<name' (('x' '=' STRING)? & ('y' '=' STRING)?) '>' name=ID '</' 'name' '>'
@@ -950,3 +945,18 @@ terminal WS:
 
 terminal ANY_OTHER:
 	.;
+
+// Accept different versions at the same time for the moment.
+// As long as no tag semantics change, this should be fine.
+// This, however, assumes that a document of a specific version doesn't ever have any nodes which belong to the newer version.
+terminal DTD: "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System " PUBLIC_VERSION "//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-" SYSTEM_VERSION ".dtd'>";
+
+// Separate versions for public/system identifiers into two distinct terminals to enable proper serialization
+terminal PUBLIC_VERSION: PUBLIC_VERSION_MAJOR "." PUBLIC_VERSION_MINOR;
+terminal SYSTEM_VERSION: SYSTEM_VERSION_MAJOR "_" SYSTEM_VERSION_MINOR;
+	
+terminal PUBLIC_VERSION_MAJOR: '1';
+terminal PUBLIC_VERSION_MINOR: '1'|'2'|'3'|'4'|'5'|'6'; // Do not use '..' notation to enable the selection of '1' as primary alternative during serialization
+
+terminal SYSTEM_VERSION_MAJOR: '1';
+terminal SYSTEM_VERSION_MINOR: '1'|'2'|'3'|'4'|'5'|'6'; // Do not use '..' notation to enable the selection of '1' as primary alternative during serialization
