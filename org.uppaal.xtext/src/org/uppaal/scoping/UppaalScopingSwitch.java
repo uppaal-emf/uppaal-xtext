@@ -13,6 +13,8 @@ import org.uppaal.expressions.IdentifierExpression;
 import org.uppaal.expressions.QuantificationExpression;
 import org.uppaal.expressions.ScopedIdentifierExpression;
 import org.uppaal.expressions.util.ExpressionsSwitch;
+import org.uppaal.queries.QueryDescription;
+import org.uppaal.queries.util.QueriesSwitch;
 import org.uppaal.statements.Block;
 import org.uppaal.statements.Iteration;
 import org.uppaal.statements.util.StatementsSwitch;
@@ -102,12 +104,20 @@ public class UppaalScopingSwitch<T> extends ComposedSwitch<T> {
 		}
 	};
 	
+	private final QueriesSwitch<T> queriesSwitch = new QueriesSwitch<>() {
+		@Override
+		public T caseQueryDescription(QueryDescription queryDescription) {
+			return handleCase(queryDescription);
+		}
+	};
+	
 	public UppaalScopingSwitch() {
 		addSwitch(uppaalSwitch);
 		addSwitch(templateSwitch);
 		addSwitch(statementsSwitch);
 		addSwitch(declarationsSwitch);
 		addSwitch(expressionSwitch);
+		addSwitch(queriesSwitch);
 	}
 	
 	public T handleCase(Iteration iteration) {
@@ -164,5 +174,9 @@ public class UppaalScopingSwitch<T> extends ComposedSwitch<T> {
 
 	public T handleCase(FunctionCallExpression expression) {
 		return defaultCase(expression);
+	}
+	
+	public T handleCase(QueryDescription queryDescription) {
+		return defaultCase(queryDescription);
 	}
 }
